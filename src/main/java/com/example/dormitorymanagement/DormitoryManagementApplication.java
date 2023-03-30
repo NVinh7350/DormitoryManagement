@@ -8,6 +8,7 @@ public class DormitoryManagementApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DormitoryManagementApplication.class, args);
+
 	}
 
 }
