@@ -20,6 +20,5 @@ public class Room {
 
     @ManyToOne
     @JoinColumn(name = "roomTypeId", nullable = false, referencedColumnName = "roomTypeId")
-    @JsonBackReference
     private RoomType roomType;
 }

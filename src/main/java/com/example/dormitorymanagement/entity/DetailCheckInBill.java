@@ -16,7 +16,6 @@ public class DetailCheckInBill {
     @Id
     @ManyToOne
     @JoinColumn(name = "checkInBillId", nullable = false, referencedColumnName = "checkInBillId")
-    @JsonBackReference
     private CheckInBill checkInBill;
 
     @Column(columnDefinition = "nvarchar(50)")
