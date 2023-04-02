@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Account {
     @Id
-    @Column(columnDefinition = "varchar(10)")
+    @Column(columnDefinition = "varchar(12)")
     private String userName;
 
     @Column(columnDefinition = "varchar(12)")
