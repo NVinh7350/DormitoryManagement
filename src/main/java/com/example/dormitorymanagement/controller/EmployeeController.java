@@ -38,10 +38,8 @@ public class EmployeeController {
     public String saveEmployee(@ModelAttribute("employee") Employee employee) {
         Account account = new Account(employee.getEmployeeId(), employee.getEmployeeName(), employee.getAccountType());
 
-        System.out.println(account);
         accountRepository.save(account);
         employee.setAccount(account);
-        System.out.println(employee);
         employeeService.saveEmployee(employee);
         return "redirect:/";
     }
