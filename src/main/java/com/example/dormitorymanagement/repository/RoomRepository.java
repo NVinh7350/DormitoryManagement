@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface RoomRepository extends JpaRepository<Room, Integer> {
     List<Room> findAllByRoomNameContaining(String room);
-    @Query(nativeQuery = true, value = "Select * from Room where room_name = :name")
+    @Query(nativeQuery = true, value = "Select * from Room where room_name = :name and room_name = :b")
     List<Object[]> findAllByCondition(@Param("name") String a, String b);
 }
