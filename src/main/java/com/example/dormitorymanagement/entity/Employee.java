@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -27,6 +28,7 @@ public class Employee {
     private String email;
 
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDay;
 
     @Column(columnDefinition = "varchar(6)")
@@ -35,7 +37,9 @@ public class Employee {
     @Column(columnDefinition = "nvarchar(100)")
     private String address;
 
+    @Transient
+    private String accountType;
     @OneToOne
-    @JoinColumn(name = "userName", nullable = false, referencedColumnName = "userName")
+    @JoinColumn(name = "userName", nullable = true, referencedColumnName = "userName")
     private Account account;
 }
