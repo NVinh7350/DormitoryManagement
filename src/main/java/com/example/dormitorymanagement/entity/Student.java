@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Student {
     @Id
-    @Column(columnDefinition = "varchar(20)")
+    @Column(columnDefinition = "varchar(12)")
     private String studentId;
 
     @ManyToOne
@@ -44,6 +44,6 @@ public class Student {
     private String studentState;
 
     @OneToOne
-    @JoinColumn(name = "userName", nullable = false, referencedColumnName = "userName")
+    @JoinColumn(name = "studentId", nullable = false, referencedColumnName = "userName")
     private Account account;
 }

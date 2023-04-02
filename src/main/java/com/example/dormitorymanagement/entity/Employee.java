@@ -15,7 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Employee {
     @Id
-    @Column(columnDefinition = "varchar(20)")
+    @Column(columnDefinition = "varchar(12)")
     private String employeeId;
 
     @Column(columnDefinition = "nvarchar(50)")
@@ -39,7 +39,7 @@ public class Employee {
 
     @Transient
     private String accountType;
-    @OneToOne
-    @JoinColumn(name = "userName", nullable = true, referencedColumnName = "userName")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employeeId", referencedColumnName = "userName")
     private Account account;
 }

@@ -1,0 +1,88 @@
+table , th, td {
+	border-collapse: collapse;
+	padding: 1% 10px;
+	border-bottom: 1px solid #B3AEAE
+}
+table {
+	width: 100%;
+	border-top : 1px solid #B3AEAE;
+	margin-bottom: 20px;
+}
+
+thead {
+	background-color: rgba(86, 176, 238, 0.15);
+}
+
+th{
+	color: black;
+	font-size: 13px;
+	font-weight: bolder;
+	text-align: left
+}
+th div {
+	display: flex;
+}
+
+th div p {
+	color: black;
+    margin-bottom:0 ;
+}
+th div i {
+	color: blue
+}
+
+
+td{
+	color: black;
+	font-size: 13px;
+}
+
+td input{
+	height: 16px;
+	aspect-ratio: 1;
+}
+.status {
+	padding: 5px 0px;
+	align-self: center;
+	border-radius: 30px;
+	text-align: center;
+	font-weight: 600;
+	color: #111111;
+}
+
+td p {
+	margin: 0;
+}
+
+.live{ 
+	background-color: rgba(66,255,0,0.3);
+}
+
+.wait{
+	background-color: rgba(255,61,0,0.3);
+}
+
+.extension{
+	background-color: rgba(255,199,0,0.3);
+}
+
+.action-container {
+	display: flex;
+	justify-content: space-evenly;
+}
+.view i{
+	margin: 0 2px;
+	color: blue;
+	font-size: 16px;
+}
+
+.add i{
+	margin: 0 2px;
+	color: orange;
+	font-size: 16px;
+}
+.remove i{
+	margin: 0 2px;
+	color: red;
+	font-size: 16px;
+}
