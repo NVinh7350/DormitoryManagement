@@ -2,6 +2,7 @@ package com.example.dormitorymanagement.service;
 
 import com.example.dormitorymanagement.entity.RoomType;
 import com.example.dormitorymanagement.repository.RoomTypeRepository;
+import com.example.dormitorymanagement.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.Optional;
 public class RoomTypeServiceImpl implements RoomTypeService {
     @Autowired
     private RoomTypeRepository roomTypeRepository;
+
     @Override
     public void saveRoomType(RoomType roomType) {
         roomTypeRepository.save(roomType);
@@ -24,6 +26,7 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     public void deleteRoomTypebyId(int id) {
         roomTypeRepository.deleteById(id);
     }
+
 
     @Override
     public RoomType getRoomTypebyId(int id) {
@@ -39,6 +42,11 @@ public class RoomTypeServiceImpl implements RoomTypeService {
     }
 
 
+
+    @Override
+    public List<RoomType> getRoomTypeListByName(String name) {
+        return roomTypeRepository.findAllByRoomTypeNameContaining(name);
+    }
 
 
 }

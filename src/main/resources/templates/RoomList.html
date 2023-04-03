@@ -64,26 +64,26 @@
     <table id="myTable">
         <thead>
         <tr>
-            <th></th>
             <th>
                 Tên phòng
             </th>
-            <th>Số điện</th>
-
-            <th>Số nước</th>
             <th>Loại phòng</th>
+            <th>Số điện</th>
+            <th>Số nước</th>
+            <th>Số sinh viên</th>
+            <th>Trạng thái</th>
+
             <th style="text-align: center">Hành động</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="room : ${listRoom}">
-            <td>
-                <input type="checkbox">
-            </td>
             <td th:text="${room.roomName}"></td>
+            <td th:text="${room.roomType.getRoomTypeName()}"></td>
             <td th:text="${room.electricity}"></td>
             <td th:text="${room.water}"></td>
-            <td th:text="${room.roomType.roomTypeName}"></td>
+            <td th:text="${room.studentNumberInRoom}+'/'+${room.roomType.getRoomCapacity()}"></td>
+            <td th:text="${room.studentNumberInRoom==room.roomType.getRoomCapacity() ? 'Hết Phòng' : 'Còn Trống'}"></td>
 
             <td class="view">
                 <div class="action-container">
@@ -99,7 +99,6 @@
                         <a th:href="@{/deleteRoom/{id}(id=${room.roomId})}">
                             <i href="#" class="bi bi-trash-fill"></i>
                         </a>
-
                     </div>
                 </div>
             </td>

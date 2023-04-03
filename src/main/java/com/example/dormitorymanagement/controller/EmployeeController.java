@@ -32,7 +32,6 @@ public class EmployeeController {
         accountRepository.save(account);
         employee.setAccount(account);
         employeeService.saveEmployee(employee);
-        System.out.println("POST");
         return "redirect:/employee/showEmployeeList";
     }
 

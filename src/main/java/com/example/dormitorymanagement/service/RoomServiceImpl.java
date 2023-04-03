@@ -3,6 +3,7 @@ package com.example.dormitorymanagement.service;
 import com.example.dormitorymanagement.entity.Room;
 import com.example.dormitorymanagement.entity.RoomType;
 import com.example.dormitorymanagement.repository.RoomRepository;
+import com.example.dormitorymanagement.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +14,15 @@ import java.util.Optional;
 public class RoomServiceImpl implements RoomService {
     @Autowired
     private RoomRepository roomRepository;
+    @Autowired
+    private StudentRepository studentRepository;
     @Override
     public List<Room> getAllRoom() {
-        return roomRepository.findAll();
+        List<Room> listAllRoom = roomRepository.findAll();
+        for(Room room : listAllRoom){
+            room.setStudentNumberInRoom(studentRepository.findAllByRoom_RoomId(room.getRoomId()).size());
+        }
+        return listAllRoom;
     }
     @Override
     public void saveRoom(Room room) {
