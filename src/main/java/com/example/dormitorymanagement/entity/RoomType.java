@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
@@ -23,5 +24,10 @@ public class RoomType {
     private String GenderUser;
     @Column(columnDefinition = "text")
     private String TypeRoomDescription;
+    @Column(columnDefinition = "money")
+    private BigDecimal priceRoom;
+
+    @OneToMany(mappedBy = "roomType", cascade = CascadeType.ALL)
+    private Set<Room> rooms;
 
 }

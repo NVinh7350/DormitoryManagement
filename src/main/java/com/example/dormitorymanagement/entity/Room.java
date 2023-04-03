@@ -17,8 +17,10 @@ public class Room {
 
     @Column(columnDefinition = "nvarchar(10)")
     private String roomName;
+    private int Electricity;
+    private int Water;
 
-    @ManyToOne
-    @JoinColumn(name = "roomTypeId", nullable = false, referencedColumnName = "roomTypeId")
+    @ManyToOne()
+    @JoinColumn(name = "roomTypeId", nullable = true, referencedColumnName = "roomTypeId")
     private RoomType roomType;
 }
