@@ -6,19 +6,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+public class Student implements Serializable {
     @Id
     @Column(columnDefinition = "varchar(12)")
     private String studentId;
 
-    @ManyToOne
-    @JoinColumn(name = "roomId", nullable = false, referencedColumnName = "roomId")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "roomId", nullable = true, referencedColumnName = "roomId")
     @JsonBackReference
     private Room room;
 
@@ -43,7 +44,7 @@ public class Student {
     @Column(columnDefinition = "varchar(10)")
     private String studentState;
 
-    @OneToOne
-    @JoinColumn(name = "studentId", nullable = false, referencedColumnName = "userName")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "studentId", nullable = true, referencedColumnName = "userName")
     private Account account;
 }

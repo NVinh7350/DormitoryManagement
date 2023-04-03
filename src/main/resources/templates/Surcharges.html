@@ -1,0 +1,160 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <title>index</title>
+    <link rel="stylesheet" th:href="@{/css/Layout.css}">
+    <link rel="stylesheet" th:href="@{/css/Table.css}">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</head>
+<body>
+<div class="w-100 h-30 flex-column header-background admin-background">
+    <div class="w-100 h-30 p-2 d-flex align-items-center">
+        <img src="../img/Logo.png" width="125px">
+        <nav class="navbar  ms-auto flex-row">
+            <div class="flex-grow-1">
+                <a class="navbar-brand navbar-element" href="#">TRANG CHỦ</a>
+            </div>
+            <div class="flex-grow-1">
+                <a class="navbar-brand navbar-element" href="#">TÀI KHOẢN</a>
+            </div>
+            <div class="flex-grow-1">
+                <a class="navbar-brand navbar-element" href="#">NHÂN VIÊN</a>
+            </div>
+            <div class="flex-grow-1">
+                <a class="navbar-brand navbar-element" href="#">SINH VIÊN</a>
+            </div>
+            <div class="flex-grow-1">
+                <a class="navbar-brand navbar-element" href="#">PHÒNG</a>
+            </div>
+            <div class="flex-grow-1">
+                <a class="navbar-brand navbar-element" href="#">HÓA ĐƠN</a>
+            </div>
+            <div class="flex-grow-1">
+                <a class="navbar-brand navbar-element" href="#">THIẾT BỊ</a>
+            </div>
+        </nav>
+    </div>
+    <div class="w-100 h-75 d-flex flex-column justify-content-center align-items-center text-white">
+        <h1>QUẢN LÝ KÝ TÚC XÁ SINH VIÊN</h1>
+        <p>Được thiết kế và xây dựng bới nhóm 1- Đô một thùng</p>
+    </div>
+</div>
+
+<h4 class="text-center ms-5 mt-5 fw-bold">Danh sách Phụ phí</h4>
+<div class="d-flex justify-content-center">
+    <form class="card m-5 w-50" th:action="@{/showEmployeeList}">
+        <div class="card-body" style="width: 70%; font-size: 14px;">
+            <div class="d-flex container-fluid" >
+                <div class="d-flex mb-3 me-3 w-50" >
+                    <input class="form-control me-2 mb-0" id="txtSearch" type="search" placeholder="Tìm kiếm" aria-label="Search" name="keyword">
+                    <button class="btn btn-outline-success" id="btnSearch" style="font-size: 13px;" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+        <table id="myTable">
+            <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Tên Thủ Tục
+                </th>
+                <th>Giá cả</th>
+                <th style="text-align: center">Hành động</th>
+            </tr>
+            </thead>
+            <tbody id="tbody">
+            <tr class="tr" th:each="surcharge : ${surchargeList}">
+
+                <td th:text="${surcharge.getSurchargeId()}" name="surchargeId"></td>
+                <td class="fw-bold" th:text="${surcharge.surchargeName}"></td>
+                <td th:text="${surcharge.price}"></td>
+                <td class="view">
+                    <div class="action-container">
+                        <div class="add">
+                            <a href="#" th:href="@{/surcharge/showSurchargeUpdateForm/{id}(id=${surcharge.surchargeId})}">
+                                <i class="bi bi-pen-fill"></i>
+                            </a>
+                        </div>
+                        <div class="remove">
+                            <a href="#" th:href="@{/surcharge/deleteSurcharge/{id}(id=${surcharge.surchargeId})}">
+                                <i href="#" class="bi bi-trash-fill"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </form>
+
+</div>
+<div class="footer-background footer-container">
+    <h5>ABOUT US</h5>
+    <p>Được thiết kế và xây dựng bới nhóm 1- Đô một thùng</p>
+    <div class="icon">
+        <a href="#" class="bi bi-facebook"></a>
+        <a href="#" class="bi bi-twitter"></a>
+        <a href="#" class="bi bi-instagram"></a>
+        <a href="#" class="bi bi-linkedin"></a>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    $('#btnSearch').on("click",function(){
+        var value = $('#txtSearch').val();
+        $.ajax({
+            method: "GET",
+            url: `/surcharge/showSurchargeFilterList`,
+            data: {
+                keyword: value,
+            },
+            success: function(data){
+                if(data){
+                    $(".tr").remove();
+                    for (var element of data) {
+                        $("#myTable").append(
+                            `<tr class="tr">
+                                <td name="employeeId">${element.surchargeId}</td>
+                                <td class="fw-bold">${element.surchargeName}</td>
+                                <td>${element.price}</td>
+                                <td class="view">
+                                  <div class="action-container">
+                                    <div class="add">
+                                        <a href="/surcharge/showSurchargeUpdateForm/${element.surchargeId}">
+                                            <i class="bi bi-pen-fill"></i>
+                                          </a>
+                                        </div>
+                                        <div class="remove">
+                                          <a href="/surcharge/deleteSurcharge/${element.surchargeId}">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                </td>
+                              </tr>`
+                        )
+                    }
+                }
+            }
+        });
+    })
+</script>
+</body>
+</html>
+

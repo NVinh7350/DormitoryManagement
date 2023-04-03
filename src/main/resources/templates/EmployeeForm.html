@@ -49,8 +49,8 @@
 </div>
 <div class="d-flex align-items-center justify-content-center w-100">
   <form class="row w-75"
-        action="#" th:action="@{/saveEmployee}" th:object="${employee}"
-        method="post"
+    th:action="@{/employee/saveEmployee}" th:object="${employee}"
+        th:method="${employee.getEmployeeId()} ? put : post"
   >
     <div class="col-xl-12 col-lg-12">
       <div class="card m-5 mt-3">
@@ -65,9 +65,14 @@
                      placeholder="Nhập họ và tên">
             </div>
             <div class="col-md-6">
-              <label for="validationDefault02" class="form-label">CMND</label>
-              <input type="text" class="form-control" id="validationDefault02"
+              <label  class="form-label">CMND</label>
+              <input type="text" class="form-control"
                      th:field="*{employeeId}"
+                     th:if="*{employeeId}" th:readonly="true"
+                     placeholder="Nhập số CCCD/ CMND" required>
+              <input type="text" class="form-control"
+                     th:field="*{employeeId}"
+                     th:if="!*{employeeId}"
                      placeholder="Nhập số CCCD/ CMND" required>
             </div>
             <div class="col-md-6">
@@ -85,10 +90,20 @@
             </div>
 
             <div class="col-md-6">
-              <label    class="form-label">Địa chỉ</label>
-              <input type="text" class="form-control h-80"
-                     th:field="*{address}"
-                     placeholder="Nhập địa chỉ thường trú" required>
+              <div class="row g-4">
+                <div class="col-md-12">
+                  <label    class="form-label">Địa chỉ</label>
+                  <input type="text" class="form-control"
+                         th:field="*{address}"
+                         placeholder="Nhập địa chỉ thường trú" required>
+                </div>
+                <div class="col-md-12">
+                  <label    class="form-label">File hình ảnh</label>
+                  <input type="file" class="form-control"
+
+                         placeholder="Nhập file hình ảnh" required>
+                </div>
+              </div>
             </div>
             <div class="col-md-6">
               <div class="row g-4">
@@ -121,14 +136,14 @@
                 </div>
                 <div class="col-md-5">
                   <label    class="form-label">Chức vụ</label>
-                  <select class="form-select form-select-lg" style="flex: 3; font-size: 13px;" th:field="*{accountType}">
+                  <select class="form-select form-select-lg" style=" font-size: 13px;" th:field="*{accountType}">
                     <option value="admin" selected>Admin</option>
                     <option value="employee">Employee</option>
                   </select>
                 </div>
                 <div class="col-md-6 ms-4 d-flex align-items-end">
                   <button class="btn btn-danger input-group btn-orange" style="width: 200px;" type="submit">
-                    Cập nhật
+                    Xác nhận
                   </button>
                 </div>
               </div>

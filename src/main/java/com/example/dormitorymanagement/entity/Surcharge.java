@@ -20,7 +20,7 @@ public class Surcharge {
     private String surchargeName;
 
     @Column(columnDefinition = "money")
-    private BigDecimal price;
+    private int price;
 
     @Column(columnDefinition = "ntext")
     private String moreInformation;

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/employee")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
@@ -22,40 +23,58 @@ public class EmployeeController {
     public String showEmployeeAddForm(Model model){
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
-        return "AddEmployee";
+        return "EmployeeForm";
+    }
+
+    @PostMapping("/saveEmployee")
+    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
+        Account account = new Account(employee.getEmployeeId(), employee.getEmployeeId(), employee.getAccountType());;
+        accountRepository.save(account);
+        employee.setAccount(account);
+        employeeService.saveEmployee(employee);
+        System.out.println("POST");
+        return "redirect:/employee/showEmployeeList";
     }
 
     @GetMapping("/showEmployeeUpdateForm/{id}")
     public String showEmployeeUpdateForm(@PathVariable(value="id") String id, Model model){
         Employee employee = employeeService.getElementById(id);
         model.addAttribute("employee", employee);
-        return "UpdateEmployee";
+        return "EmployeeForm";
     }
 
-
-
-    @PostMapping("/saveEmployee")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
-        Account account = new Account(employee.getEmployeeId(), employee.getEmployeeName(), employee.getAccountType());
-
-        System.out.println(account);
-        accountRepository.save(account);
-        employee.setAccount(account);
-        System.out.println(employee);
+    @PutMapping("/saveEmployee")
+    public String updateEmployee(@ModelAttribute("employee") Employee employee){
         employeeService.saveEmployee(employee);
-        return "redirect:/";
+        return "redirect:/employee/showEmployeeList";
     }
 
     @GetMapping("/showEmployeeList")
-    public String showEmployeeList(Model model){
+    public String showEmployeeFilterList(Model model){
         List<Employee> employeeList = employeeService.getAllEmployee();
         model.addAttribute("employeeList", employeeList);
         return "Employees";
     }
 
+    @GetMapping("/showEmployeeFilterList")
+    @ResponseBody
+    public List<Employee> showEmployeeFilterList(Model model,@RequestParam String keyword , @RequestParam String accountType){
+        List<Employee> employeeList = null;
+        System.out.println(keyword.equals(""));
+        System.out.println(keyword);
+        System.out.println(accountType == null );
+        if(!keyword.equals("")){
+            employeeList = employeeService.filterAllEmployeeByNameOrId(keyword,accountType);
+        } else {
+            employeeList = employeeService.filterAllEmployee(accountType);
+        }
+        model.addAttribute("employeeList", employeeList);
+        return employeeList;
+    }
+
     @GetMapping("/deleteEmployee/{id}")
-    public String deleteEmloyee(@PathVariable(value="id") String id){
+    public String deleteEmployee(@PathVariable(value="id") String id){
         employeeService.deleteEmployeeById(id);
-        return "redirect:/";
+        return "redirect:/employee/showEmployeeList";
     }
 }
