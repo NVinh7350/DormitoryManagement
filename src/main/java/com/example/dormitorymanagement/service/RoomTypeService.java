@@ -9,5 +9,6 @@ public interface RoomTypeService {
     public List<RoomType> getAllRoomType();
     public void deleteRoomTypebyId(int id);
     public RoomType getRoomTypebyId(int id);
+    public List<RoomType> getRoomTypeListByName(String name);
 
 }

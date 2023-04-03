@@ -1,6 +1,7 @@
 package com.example.dormitorymanagement.controller;
 
 
+import com.example.dormitorymanagement.entity.Employee;
 import com.example.dormitorymanagement.entity.Room;
 import com.example.dormitorymanagement.entity.RoomType;
 import com.example.dormitorymanagement.service.RoomService;
@@ -66,5 +67,18 @@ public class TypeRoomController {
         model.addAttribute("listRoom", lstRoom);
         model.addAttribute("tieude", "Quản lí phòng");
         return "RoomList";
+    }
+
+    @GetMapping("/showRoomTypeFilterList")
+    @ResponseBody
+    public List<RoomType> showRoomTypeFilterList(Model model, @RequestParam String keyword){
+        List<RoomType> employeeList = null;
+        if(keyword.equals("")){
+            employeeList = roomTypeService.getAllRoomType();
+        } else {
+            employeeList = roomTypeService.getRoomTypeListByName(keyword);
+        }
+        model.addAttribute("employeeList", employeeList);
+        return employeeList;
     }
 }

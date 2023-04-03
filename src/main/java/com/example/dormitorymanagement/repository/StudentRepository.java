@@ -12,4 +12,6 @@ public interface StudentRepository extends JpaRepository<Student, String> {
 
     @Query(nativeQuery = true, value = "Select * from student where student_name = :keyword")
     public List<Student> search(@Param("keyword") String keyword);
+
+    public List<Student> findAllByRoom_RoomId(int id);
 }

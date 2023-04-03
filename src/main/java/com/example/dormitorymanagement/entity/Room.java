@@ -23,4 +23,6 @@ public class Room {
     @ManyToOne()
     @JoinColumn(name = "roomTypeId", nullable = true, referencedColumnName = "roomTypeId")
     private RoomType roomType;
+    @Transient
+    private int studentNumberInRoom;
 }

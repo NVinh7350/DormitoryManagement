@@ -12,6 +12,9 @@
   <title>Danh sách loại phòng</title>
   <link rel="stylesheet" th:href="@{/css/Layout.css}">
   <link rel="stylesheet" th:href="@{/css/Table.css}">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 
@@ -19,72 +22,115 @@
 <div th:replace="fragments :: header-admin"></div>
 
 <h4 class="text-center ms-5 mt-5 fw-bold">Danh sách loại phòng</h4>
-<div class="card m-5">
-  <div class="card-body" style="width: 70%; font-size: 14px;">
-    <div class="d-flex container-fluid" style="flex: 3; ">
-      <form class="d-flex mb-3 me-3 w-35" >
-        <input class="form-control me-2 mb-0" type="search" placeholder="Tìm kiếm" aria-label="Search">
-        <button class="btn btn-outline-success"  style="font-size: 13px;" type="submit">Search</button>
-      </form>
-
-    </div>
-  </div>
-  <table id="myTable">
-    <thead>
-    <tr>
-      <th></th>
-      <th>
-        Tên loại phòng
-      </th>
-      <th>Số lượng người ở</th>
-      <th>
-        Giới tính người ở
-      </th>
-      <th>Giá</th>
-      <th>Mô tả</th>
-      <th style="text-align: center">Hành động</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="typeroom : ${typeRoomList}">
-      <td>
-        <input type="checkbox">
-      </td>
-      <td th:text="${typeroom.roomTypeName}"></td>
-      <td class="fw-bold" th:text="${typeroom.roomCapacity}"></td>
-      <td th:text="${typeroom.genderUser}"></td>
-      <td th:text="${typeroom.priceRoom}"></td>
-      <td th:text="${typeroom.typeRoomDescription}"></td>
-
-      <td class="view">
-        <div class="action-container">
-          <div class="view">
-            <a th:href="@{/getRoombyTypeId/{id}(id=${typeroom.roomTypeId})}">
-            <i href="#" class="bi bi-eye-fill"></i>
-          </div>
-          <div class="add">
-            <a th:href="@{/updateRoomType/{id}(id=${typeroom.roomTypeId})}">
-              <i class="bi bi-pen-fill"></i>
-            </a>
-          </div>
-          <div class="remove">
-            <a th:href="@{/deleteRoomType/{id}(id=${typeroom.roomTypeId})}">
-              <i href="#" class="bi bi-trash-fill"></i>
-            </a>
-
-          </div>
+<div class="d-flex justify-content-center">
+  <div class="card m-5 w-60">
+    <div class="card-body" style="width: 70%; font-size: 14px;">
+      <div class="d-flex container-fluid" style="flex: 3; ">
+        <div class="d-flex mb-3 me-3 w-35" >
+          <input class="form-control me-2 mb-0" id="txtSearch" type="search" placeholder="Tìm kiếm" aria-label="Search" name="keyword">
+          <button class="btn btn-outline-success" id="btnSearch" style="font-size: 13px;" type="button">Search</button>
         </div>
-      </td>
-    </tr>
-
-    </tbody>
-  </table>
+      </div>
+    </div>
+    <table id="myTable">
+      <thead>
+      <tr>
+        <th></th>
+        <th>
+          Loại phòng
+        </th>
+        <th>Số người tối đa</th>
+        <th>
+          Giới tính người ở
+        </th>
+        <th>Giá</th>
+        <th style="text-align: center">Hành động</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="tr" th:each="typeroom : ${typeRoomList}">
+        <td>
+          <input type="checkbox">
+        </td>
+        <td th:text="${typeroom.roomTypeName}"></td>
+        <td class="fw-bold" th:text="${typeroom.roomCapacity}"></td>
+        <td th:text="${typeroom.genderUser}"></td>
+        <td th:text="${typeroom.priceRoom}"></td>
+        <td class="view">
+          <div class="action-container">
+            <div class="view">
+              <a th:href="@{/getRoombyTypeId/{id}(id=${typeroom.roomTypeId})}">
+                <i href="#" class="bi bi-eye-fill"></i>
+              </a>
+            </div>
+            <div class="add">
+              <a th:href="@{/updateRoomType/{id}(id=${typeroom.roomTypeId})}">
+                <i class="bi bi-pen-fill"></i>
+              </a>
+            </div>
+            <div class="remove">
+              <a th:href="@{/deleteRoomType/{id}(id=${typeroom.roomTypeId})}">
+                <i href="#" class="bi bi-trash-fill"></i>
+              </a>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 
 </div>
-
 <div th:replace="fragments :: footer"></div>
-
-<script ></script>
+<script th:inline="javascript">
+  $('#btnSearch').on("click",function(){
+    var value = $('#txtSearch').val();
+    $.ajax({
+      method: "GET",
+      url: `/showRoomTypeFilterList`,
+      data: {
+        keyword: value,
+      },
+      success: function(data){
+        if(data){
+          $(".tr").remove();
+          for (var typeroom of data) {
+            $("#myTable").append(
+                    `<tr class="tr">
+                      <td>
+                        <input type="checkbox">
+                      </td>
+                      <td>${typeroom.roomTypeName}</td>
+                      <td class="fw-bold">${typeroom.roomCapacity}</td>
+                      <td>${typeroom.genderUser}</td>
+                      <td>${typeroom.priceRoom}</td>
+                      <td class="view">
+                        <div class="action-container">
+                          <div class="view">
+                            <a href="/getRoombyTypeId/${typeroom.roomTypeId}">
+                              <i href="#" class="bi bi-eye-fill"></i>
+                            </a>
+                          </div>
+                          <div class="add">
+                            <a href="/updateRoomType/${typeroom.roomTypeId}">
+                              <i class="bi bi-pen-fill"></i>
+                            </a>
+                          </div>
+                          <div class="remove">
+                            <a href="/deleteRoomType/${typeroom.roomTypeId}">
+                              <i href="#" class="bi bi-trash-fill"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>`
+            )
+          }
+        }
+      }
+    });
+  })
+</script>
 </body>
 </html>
 
