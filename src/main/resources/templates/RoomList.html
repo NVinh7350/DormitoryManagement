@@ -16,38 +16,7 @@
 
 
 <body>
-<div class="w-100 h-30 flex-column header-background admin-background">
-    <div class="w-100 h-30 p-2 d-flex align-items-center">
-        <img src="../img/Logo.png" width="125px">
-        <nav class="navbar  ms-auto flex-row">
-            <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">TRANG CHỦ</a>
-            </div>
-            <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">TÀI KHOẢN</a>
-            </div>
-            <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">NHÂN VIÊN</a>
-            </div>
-            <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">SINH VIÊN</a>
-            </div>
-            <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">PHÒNG</a>
-            </div>
-            <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">HÓA ĐƠN</a>
-            </div>
-            <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">THIẾT BỊ</a>
-            </div>
-        </nav>
-    </div>
-    <div class="w-100 h-75 d-flex flex-column justify-content-center align-items-center text-white">
-        <h1>QUẢN LÝ KÝ TÚC XÁ SINH VIÊN</h1>
-        <p>Được thiết kế và xây dựng bới nhóm 1- Đô một thùng</p>
-    </div>
-</div>
+<div th:replace="fragments :: header-admin"></div>
 
 <h4 class="text-center ms-5 mt-5 fw-bold">Danh sách phòng</h4>
 <p style="color: green; text-align: center" th:text="${message}"></p>
@@ -110,16 +79,7 @@
 
 </div>
 
-<div class="footer-background footer-container">
-    <h5>ABOUT US</h5>
-    <p>Được thiết kế và xây dựng bới nhóm 1- Đô một thùng</p>
-    <div class="icon">
-        <a href="#" class="bi bi-facebook"></a>
-        <a href="#" class="bi bi-twitter"></a>
-        <a href="#" class="bi bi-instagram"></a>
-        <a href="#" class="bi bi-linkedin"></a>
-    </div>
-</div>
+<div th:replace="fragments :: footer"></div>
 
 <script ></script>
 </body>

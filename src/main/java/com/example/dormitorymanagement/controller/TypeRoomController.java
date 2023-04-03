@@ -23,6 +23,7 @@ public class TypeRoomController {
     public String addRoomType(Model model) {
         RoomType roomType = new RoomType();
         model.addAttribute("roomtype" , roomType);
+        model.addAttribute("tieude", "Quản lí loại phòng");
         return "AddRoomType";
     }
 
@@ -37,6 +38,7 @@ public class TypeRoomController {
     public String getAllRoomType(Model model) {
         List<RoomType> lstRoomType = roomTypeService.getAllRoomType();
         model.addAttribute("typeRoomList", lstRoomType);
+        model.addAttribute("tieude", "Quản lí loại phòng");
         return "TypeRoomList";
     }
     @GetMapping("/deleteRoomType/{id}")
@@ -49,6 +51,7 @@ public class TypeRoomController {
     public String updateRoomType(@PathVariable(value = "id") int id, Model model) {
         RoomType roomType = roomTypeService.getRoomTypebyId(id);
         model.addAttribute("RoomTypeObj", roomType);
+        model.addAttribute("tieude", "Quản lí loại phòng");
         return "UpdateRoomType";
     }
     @PutMapping("/updateRoomType")
@@ -61,6 +64,7 @@ public class TypeRoomController {
     public String getRoombyTypeId(@PathVariable(value = "id") int id, Model model) {
         List<Room> lstRoom = roomService.getRoomByTypeId(id);
         model.addAttribute("listRoom", lstRoom);
+        model.addAttribute("tieude", "Quản lí phòng");
         return "RoomList";
     }
 }

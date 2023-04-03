@@ -14,39 +14,7 @@
   <link rel="stylesheet" th:href="@{/css/Table.css}">
 </head>
 <body>
-<div class="w-100 h-30 flex-column header-background">
-  <div class="w-100 h-30 p-2 d-flex align-items-center">
-    <img src="../img/Logo.png" width="125px">
-    <nav class="navbar  ms-auto flex-row">
-      <div class="flex-grow-1">
-        <a class="navbar-brand navbar-element" href="#">TRANG CHỦ</a>
-      </div>
-      <div class="flex-grow-1">
-        <a class="navbar-brand navbar-element" href="#">PHÒNG</a>
-      </div>
-      <div class="navbar-element dropdown me-3">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-           data-bs-toggle="dropdown" aria-expanded="false">
-          THÔNG TIN
-        </a>
-        <ul class="dropdown-menu">
-          <li><a class="navbar-element" href="#">GIÁ CẢ</a></li>
-          <li><a class="navbar-element" href="#">THỦ  </a></li>
-        </ul>
-      </div>
-      <div class="flex-grow-1">
-        <a class="navbar-brand navbar-element" href="#">LIÊN LẠC</a>
-      </div>
-      <div class="flex-grow-1">
-        <a class="navbar-brand navbar-element" href="#">ĐĂNG NHẬP</a>
-      </div>
-    </nav>
-  </div>
-  <div class="w-100 h-75 d-flex flex-column justify-content-center align-items-center text-white">
-    <h1>QUẢN LÝ KÝ TÚC XÁ SINH VIÊN</h1>
-    <p>Được thiết kế và xây dựng bới nhóm 1- Đô một thùng</p>
-  </div>
-</div>
+<div th:replace="fragments :: header"></div>
 
 
 
@@ -187,18 +155,7 @@
 </div>
 
 
-
-
-<div class="footer-background footer-container">
-  <h5>ABOUT US</h5>
-  <p>Được thiết kế và xây dựng bới nhóm 1- Đô một thùng</p>
-  <div class="icon">
-    <a href="#" class="bi bi-facebook"></a>
-    <a href="#" class="bi bi-twitter"></a>
-    <a href="#" class="bi bi-instagram"></a>
-    <a href="#" class="bi bi-linkedin"></a>
-  </div>
-</div>
+<div th:replace="fragments :: footer"></div>
 </body>
 </html>
 
