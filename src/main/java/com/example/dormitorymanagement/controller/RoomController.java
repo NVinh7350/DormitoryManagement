@@ -17,11 +17,13 @@ public class RoomController {
     private RoomTypeService roomTypeService;
     @Autowired
     private RoomService roomService;
+
     @GetMapping("/addRoom")
     public String addRoom(Model model) {
         Room room = new Room();
         List<RoomType> lstRoomType = roomTypeService.getAllRoomType();
         model.addAttribute("typeRoomList", lstRoomType);
+        model.addAttribute("tieude", "Quản lí phòng");
         model.addAttribute("room" , room);
         return "AddRoom";
     }
@@ -37,6 +39,7 @@ public class RoomController {
     public String listAllRoom(Model model) {
         List<Room> lstroom = roomService.getAllRoom();
         model.addAttribute("listRoom", lstroom);
+        model.addAttribute("tieude", "Quản lí phòng");
         return "RoomList";
     }
     @GetMapping("/deleteRoom/{id}")
@@ -52,6 +55,7 @@ public class RoomController {
         model.addAttribute("room", room);
         List<RoomType> lstRoomType = roomTypeService.getAllRoomType();
         model.addAttribute("typeRoomList", lstRoomType);
+        model.addAttribute("tieude", "Quản lí phòng");
         return "UpdateRoom";
 
     }
