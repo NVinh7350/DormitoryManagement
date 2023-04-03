@@ -46,19 +46,23 @@
     <p>Được thiết kế và xây dựng bới nhóm 1- Đô một thùng</p>
   </div>
 </div>
-
-<h4 class="text-center ms-5 mt-5 fw-bold">Danh sách nhân viên</h4>
+<h4 class="text-center ms-5 mt-5 fw-bold">Danh sách sinh viên</h4>
 <div class="card m-5">
   <div class="card-body" style="width: 70%; font-size: 14px;">
     <div class="d-flex container-fluid" style="flex: 3; ">
-      <form class="d-flex mb-3 me-3 w-35" >
-        <input class="form-control me-2 mb-0" type="search" placeholder="Tìm kiếm" aria-label="Search">
+      <form class="d-flex mb-3 me-3 w-35"
+            action="#" th:action="@{/findStudentsName}"
+            method="get"
+      >
+
+        <input class="form-control me-2 mb-0" type="search" placeholder="Tìm kiếm" aria-label="Search" name="keyword" th:value="${keyword}">
         <button class="btn btn-outline-success"  style="font-size: 13px;" type="submit">Search</button>
       </form>
       <select class="form-select form-select-lg mb-3 mx-3 w-15" style="font-size: 13px;">
-        <option selected>Quyền truy cập</option>
-        <option value="admin">Admin</option>
-        <option value="employee">Employee</option>
+        <option selected>Trạng thái</option>
+        <option value="1">Đang ở</option>
+        <option value="2">Chờ duyệt</option>
+        <option value="2">Chờ gia hạn</option>
       </select>
     </div>
   </div>
@@ -80,35 +84,44 @@
       </th>
       <th>Điện thoại</th>
       <th>Ngày sinh</th>
-      <th>Quyền truy cập</th>
+      <th>
+        <div class="d-flex align-items-center">
+          <p>Phòng</p>
+          <i href="#" class="bi bi-chevron-expand"></i>
+        </div>
+      </th>
+      <th style="text-align: center">Trạng thái</th>
       <th style="text-align: center">Hành động</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="employee : ${employeeList}">
+    <tr th:each="student : ${students}">
       <td>
         <input type="checkbox">
       </td>
-      <td th:text="${employee.employeeId}"></td>
-      <td class="fw-bold" th:text="${employee.employeeName}"></td>
-      <td th:text="${employee.gender}"></td>
-      <td th:text="${employee.phone}"></td>
-      <td th:text="${employee.birthDay}"></td>
-      <td th:text="${employee.account.accountType}">
-        <p th:classappend="${'admin' == 'admin'} ? 'live' : 'extension'" class="status">Đang ở</p>
+      <td th:text="${student.studentId}"></td>
+      <td class="fw-bold" th:text="${student.studentName}"></td>
+      <td th:text="${student.gender}"></td>
+      <td th:text="${student.phone}"></td>
+      <td th:text="${student.birthDay}"></td>
+      <td th:text="${student.room}"></td>
+      <td class="">
+        <p class="status" th:classappend= "${student.studentState == 'wait'} ? 'wait' : (${student.studentState == 'live'} ? 'live' : 'extension')"
+           th:text="${student.studentState==null}?'Chờ xác nhận':'Đang ở'">
+        </p>
       </td>
       <td class="view">
         <div class="action-container">
           <div class="view">
-            <i href="#" class="bi bi-eye-fill"></i>
+            <i  class="bi bi-eye-fill"></i>
           </div>
           <div class="add">
-            <a href="#" th:href="@{/showEmployeeUpdateForm/{id}(id=${employee.employeeId})}">
+            <a href="#" th:href="@{/showStudentUpdateForm/{id}(id=${student.studentId})}">
               <i class="bi bi-pen-fill"></i>
             </a>
           </div>
           <div class="remove">
-            <a href="#" th:href="@{/deleteEmployee/{id}(id=${employee.employeeId})}">
+            <a href="#" th:href="@{/deleteStudent/{id}(id=${student.studentId})}">
               <i href="#" class="bi bi-trash-fill"></i>
             </a>
           </div>
@@ -117,7 +130,6 @@
     </tr>
     </tbody>
   </table>
-
 </div>
 
 <div class="footer-background footer-container">
