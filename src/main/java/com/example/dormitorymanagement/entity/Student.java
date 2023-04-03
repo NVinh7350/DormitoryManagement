@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -33,6 +34,7 @@ public class Student implements Serializable {
     private String email;
 
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDay;
 
     @Column(columnDefinition = "varchar(6)")
@@ -44,7 +46,16 @@ public class Student implements Serializable {
     @Column(columnDefinition = "varchar(10)")
     private String studentState;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "studentId", nullable = true, referencedColumnName = "userName")
+    @Column(columnDefinition = "nvarchar(50)")
+    private String relativeName;
+
+    @Column(columnDefinition = "varchar(10)")
+    private String relativePhone;
+
+    @Column(columnDefinition = "nvarchar(100)")
+    private String relativeAddress;
+
+    @OneToOne
+    @JoinColumn(name = "studentId", nullable = false, referencedColumnName = "userName")
     private Account account;
 }
