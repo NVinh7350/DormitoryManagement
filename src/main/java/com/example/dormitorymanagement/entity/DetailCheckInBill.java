@@ -14,9 +14,16 @@ import java.util.Date;
 @AllArgsConstructor
 public class DetailCheckInBill {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int detailCheckInBillId;
+
     @ManyToOne
     @JoinColumn(name = "checkInBillId", nullable = false, referencedColumnName = "checkInBillId")
     private CheckInBill checkInBill;
+
+    @ManyToOne
+    @JoinColumn(name = "surchargeId", nullable = false, referencedColumnName = "surchargeId")
+    private Surcharge surcharge;
 
     @Column(columnDefinition = "nvarchar(50)")
     private String surchargeName;

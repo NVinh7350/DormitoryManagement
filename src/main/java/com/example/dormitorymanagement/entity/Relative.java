@@ -11,6 +11,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@IdClass(Student.class)
 public class Relative {
     @Id
     @OneToOne

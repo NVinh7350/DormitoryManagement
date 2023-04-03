@@ -5,6 +5,7 @@ import com.example.dormitorymanagement.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,5 +41,31 @@ public class EmployeeServiceImpl implements EmployeeService{
         employeeRepository.deleteById(id);
     }
 
+    @Override
+    public List<Employee> filterAllEmployeeByNameOrId(String value, String accountType) {
+        List<Employee> employees = employeeRepository.findAllByEmployeeNameContainingOrEmployeeIdContaining(value, value);
+        if(accountType.equals("all"))
+            return employees;
+        List<Employee> subEmployees = new ArrayList<>();
+        for(Employee e : employees){
+            if(e.getAccount().getAccountType().equals(accountType)){
+                subEmployees.add(e);
+            }
+        }
+        return subEmployees;
+    }
 
+    @Override
+    public List<Employee> filterAllEmployee(String accountType) {
+        List<Employee> employees = employeeRepository.findAll();
+        if(accountType.equals("all"))
+            return employees;
+        List<Employee> subEmployees = new ArrayList<>();
+        for(Employee e : employees){
+            if(e.getAccount().getAccountType().equals(accountType)){
+                subEmployees.add(e);
+            }
+        }
+        return subEmployees;
+    }
 }
