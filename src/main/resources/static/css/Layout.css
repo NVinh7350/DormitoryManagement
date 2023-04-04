@@ -360,3 +360,9 @@ body {
     align-self: center; 
     background-color: #dfdfdf;
 }
+
+.error-span {
+    color: red;
+    font-size: 11px;
+    font-style: italic;
+}
