@@ -71,4 +71,18 @@ public class StudentController {
         model.addAttribute("students", students);
         return "students";
     }
+
+    @GetMapping("/studentFilterList")
+    @ResponseBody
+    public List<Student> showStudentFilterList(Model model,@RequestParam String keyword , @RequestParam String studentState) {
+        List<Student> lst_Students = null;
+        if(studentState.equals("all")) {
+            lst_Students = studentService.findStudentsByNameContains(keyword);
+        }
+        else {
+            lst_Students = studentService.findStudentsFilter(studentState, keyword);
+        }
+        model.addAttribute("lst_Student", lst_Students);
+        return lst_Students;
+    }
 }

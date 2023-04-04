@@ -66,5 +66,19 @@ public class RoomController {
         return "redirect:/listAllRoom";
     }
 
+    @GetMapping("/showRoomFilterList")
+    @ResponseBody
+    public List<Room> showRoomFilterList(Model model, @RequestParam String keyword) {
+        List<Room> lstroom = null;
+        if(keyword.equals("")) {
+            lstroom = roomService.getAllRoom();
+        }
+        else {
+            lstroom = roomService.getRoomListByName(keyword);
+        }
+        model.addAttribute("lst_room", lstroom);
+        return lstroom;
+    }
+
 
 }

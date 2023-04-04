@@ -14,4 +14,7 @@ public interface StudentRepository extends JpaRepository<Student, String> {
     public List<Student> search(@Param("keyword") String keyword);
 
     public List<Student> findAllByRoom_RoomId(int id);
+
+    public List<Student> findAllByStudentStateAndStudentNameContaining(String studentState, String keyword);
+    public List<Student> findAllByStudentNameContaining(String keyword);
 }

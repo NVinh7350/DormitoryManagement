@@ -12,6 +12,9 @@
     <title>Danh sách phòng</title>
     <link rel="stylesheet" th:href="@{/css/Layout.css}">
     <link rel="stylesheet" th:href="@{/css/Table.css}">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 
 
@@ -23,10 +26,10 @@
 <div class="card m-5">
     <div class="card-body" style="width: 70%; font-size: 14px;">
         <div class="d-flex container-fluid" style="flex: 3; ">
-            <form class="d-flex mb-3 me-3 w-35" >
-                <input class="form-control me-2 mb-0" type="search" placeholder="Tìm kiếm" aria-label="Search">
-                <button class="btn btn-outline-success"  style="font-size: 13px;" type="submit">Search</button>
-            </form>
+            <div class="d-flex mb-3 me-3 w-35" >
+                <input class="form-control me-2 mb-0" id="txtSearch" type="search" placeholder="Tìm kiếm" aria-label="Search" name="keyword">
+                <button class="btn btn-outline-success"  id="btnSearch" style="font-size: 13px;" type="button">Search</button>
+            </div>
 
         </div>
     </div>
@@ -46,7 +49,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="room : ${listRoom}">
+        <tr class="tr" th:each="room : ${listRoom}">
             <td th:text="${room.roomName}"></td>
             <td th:text="${room.roomType.getRoomTypeName()}"></td>
             <td th:text="${room.electricity}"></td>
@@ -80,7 +83,54 @@
 
 <div th:replace="fragments :: footer"></div>
 
-<script ></script>
+<script th:inline="javascript">
+    $('#btnSearch').on("click",function(){
+        var value = $('#txtSearch').val();
+        $.ajax({
+            method: "GET",
+            url: `/showRoomFilterList`,
+            data: {
+                keyword: value,
+            },
+            success: function(data){
+                if(data){
+                    $(".tr").remove();
+                    for (var room of data) {
+                        $("#myTable").append(
+                            `<tr class="tr">
+                                <td>${room.roomName}</td>
+                                <td>${room.roomType.roomTypeName}</td>
+                                <td>${room.electricity}</td>
+                              <td>${room.water}</td>
+                              <td>${room.studentNumberInRoom +'/'+ room.roomType.roomCapacity}</td>
+                              <td>${room.studentNumberInRoom==room.roomType.roomCapacity ? 'Hết Phòng' : 'Còn Trống'}</td>
+                              <td class="view">
+                                <div class="action-container">
+                                  <div class="view">
+                                    <a href="#">
+                                      <i href="#" class="bi bi-eye-fill"></i>
+                                    </a>
+                                  </div>
+                                  <div class="add">
+                                    <a href="/updateRoom/${room.roomId}">
+                                      <i class="bi bi-pen-fill"></i>
+                                    </a>
+                                  </div>
+                                  <div class="remove">
+                                    <a href="/deleteRoom/${room.roomId}">
+                                      <i href="#" class="bi bi-trash-fill"></i>
+                                    </a>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>`
+                        )
+                    }
+                }
+            }
+        });
+    })
+</script>
 </body>
 </html>
 

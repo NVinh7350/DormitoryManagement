@@ -21,7 +21,7 @@ public class Student implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "roomId", nullable = true, referencedColumnName = "roomId")
-    @JsonBackReference
+
     private Room room;
 
     @Column(columnDefinition = "nvarchar(50)")
