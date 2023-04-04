@@ -13,5 +13,6 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 //    List<Object[]> findAllByCondition(@Param("name") String a, String b);
 
     List<Room> findRoomsByRoomTypeRoomTypeId(int id);
+    List<Room> findAllByRoomNameContaining(String name);
 
 }

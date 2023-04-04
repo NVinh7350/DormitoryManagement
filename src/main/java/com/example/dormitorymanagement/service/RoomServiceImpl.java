@@ -51,4 +51,8 @@ public class RoomServiceImpl implements RoomService {
         return room;
     }
 
+    @Override
+    public List<Room> getRoomListByName(String name) {
+        return roomRepository.findAllByRoomNameContaining(name);
+    }
 }

@@ -12,4 +12,6 @@ public interface StudentService {
     public void deleteStudentById(String id);
 
     public List<Student> findStudentByName(String keyword);
+    public List<Student> findStudentsByNameContains(String keyword);
+    public List<Student> findStudentsFilter(String studentState, String keyword);
 }

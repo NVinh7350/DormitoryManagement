@@ -12,6 +12,10 @@
   <title>index</title>
   <link rel="stylesheet" th:href="@{/css/Layout.css}">
   <link rel="stylesheet" th:href="@{/css/Table.css}">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 </head>
 <body>
 <div th:replace="fragments :: header-admin"></div>
@@ -20,19 +24,16 @@
 <div class="card m-5">
   <div class="card-body" style="width: 70%; font-size: 14px;">
     <div class="d-flex container-fluid" style="flex: 3; ">
-      <form class="d-flex mb-3 me-3 w-35"
-            action="#" th:action="@{/findStudentsName}"
-            method="get"
-      >
+      <div class="d-flex mb-3 me-3 w-35" >
 
-        <input class="form-control me-2 mb-0" type="search" placeholder="Tìm kiếm" aria-label="Search" name="keyword" th:value="${keyword}">
-        <button class="btn btn-outline-success"  style="font-size: 13px;" type="submit">Search</button>
-      </form>
-      <select class="form-select form-select-lg mb-3 mx-3 w-15" style="font-size: 13px;">
-        <option selected>Trạng thái</option>
-        <option value="1">Đang ở</option>
-        <option value="2">Chờ duyệt</option>
-        <option value="2">Chờ gia hạn</option>
+        <input class="form-control me-2 mb-0" id="txtSearch" type="search" placeholder="Tìm kiếm" aria-label="Search" name="keyword" th:value="${keyword}">
+        <button class="btn btn-outline-success" id="btnSearch" style="font-size: 13px;" type="button">Search</button>
+      </div>
+      <select id="studentState" class="form-select form-select-lg mb-3 mx-3 w-15" style="font-size: 13px;">
+        <option selected value="all">Trạng thái</option>
+        <option value="live">Đang ở</option>
+        <option value="wait">Chờ duyệt</option>
+        <option value="extension">Chờ gia hạn</option>
       </select>
     </div>
   </div>
@@ -65,7 +66,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="student : ${students}">
+    <tr class="tr" th:each="student : ${students}">
       <td>
         <input type="checkbox">
       </td>
@@ -74,10 +75,10 @@
       <td th:text="${student.gender}"></td>
       <td th:text="${student.phone}"></td>
       <td th:text="${student.birthDay}"></td>
-      <td th:text="${student.room}"></td>
+      <td th:text="${student.room.roomName}"></td>
       <td class="">
         <p class="status" th:classappend= "${student.studentState == 'wait'} ? 'wait' : (${student.studentState == 'live'} ? 'live' : 'extension')"
-           th:text="${student.studentState==null}?'Chờ xác nhận':'Đang ở'">
+           th:text="${student.studentState !='live'}?'Chờ xác nhận':'Đang ở'">
         </p>
       </td>
       <td class="view">
@@ -103,7 +104,65 @@
 </div>
 
 <div th:replace="fragments :: footer"></div>
-<script ></script>
+<script th:inline="javascript">
+  $('#btnSearch').on("click",function(){
+    var value = $('#txtSearch').val();
+    var select = $('#studentState').val();
+    $.ajax({
+      method: "GET",
+      url: `/studentFilterList`,
+      data: {
+        keyword: value,
+        studentState: select
+
+      },
+      success: function(data){
+        if(data){
+          $(".tr").remove();
+          for (var student of data) {
+            $("#myTable").append(
+                    `<tr class="tr">
+                <td>
+                  <input type="checkbox">
+                </td>
+                <td>${student.studentId}</td>
+                <td>${student.studentName}</td>
+                <td>${student.gender}</td>
+                <td>${student.phone}</td>
+                <td>${student.birthDay}</td>
+                <td>${student.room.roomName}</td>
+                <td class="">
+                    <p class="status" th:classappend= "${student.studentState == 'wait'} ? 'wait' : (${student.studentState == 'live'} ? 'live' : 'extension')"
+                       th:text="${student.studentState!= 'live'}?'Chờ xác nhận':'Đang ở'">
+                    </p>
+                </td>
+                <td class="view">
+                  <div class="action-container">
+                    <div class="view">
+                      <i href="#" class="bi bi-eye-fill"></i>
+                    </div>
+                    <div class="add">
+                      <a href="/showStudentUpdateForm/${student.studentId}">
+                        <i class="bi bi-pen-fill"></i>
+                      </a>
+                    </div>
+                    <div class="remove">
+                      <a href="/deleteStudent/${student.studentId}">
+                        <i href="#" class="bi bi-trash-fill"></i>
+                      </a>
+
+                    </div>
+                  </div>
+                </td>
+              </tr>`
+            )
+          }
+        }
+      }
+    });
+  })
+
+</script>
 </body>
 </html>
 

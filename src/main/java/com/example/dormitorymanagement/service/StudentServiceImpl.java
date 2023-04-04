@@ -49,4 +49,14 @@ public class StudentServiceImpl implements StudentService{
 
         return studentRepository.findAll();
     }
+
+    @Override
+    public List<Student> findStudentsByNameContains(String keyword) {
+        return studentRepository.findAllByStudentNameContaining(keyword);
+    }
+
+    @Override
+    public List<Student> findStudentsFilter(String studentState, String keyword) {
+        return studentRepository.findAllByStudentStateAndStudentNameContaining(studentState, keyword);
+    }
 }
