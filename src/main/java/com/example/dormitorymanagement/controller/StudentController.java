@@ -5,6 +5,8 @@ import com.example.dormitorymanagement.entity.Employee;
 import com.example.dormitorymanagement.entity.Room;
 import com.example.dormitorymanagement.entity.Student;
 import com.example.dormitorymanagement.service.AccountService;
+import com.example.dormitorymanagement.service.RoomService;
+import com.example.dormitorymanagement.service.RoomTypeService;
 import com.example.dormitorymanagement.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,17 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping(path = "/saveStudentAJAX", consumes = "application/json")
-    public String saveStudentAJAX(@RequestBody @Valid Student student , BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
-            System.err.println(student);
-            return "RegisterRoom";
+    public String saveStudentAJAX(@RequestBody Student student) {
+        int studentNumberInRoom = student.getRoom().getStudentNumberInRoom();
+        int roomCapacity = student.getRoom().getRoomType().getRoomCapacity();
+        System.out.println("STUDENT "+ student);
+        if(roomCapacity > studentNumberInRoom){
+            studentService.saveStudent(student);
+            return "redirect:/guest/rooms";
         }
-        studentService.saveStudent(student);
-        return "redirect:/guest/rooms";
+        else {
+            return "redirect:";
+        }
     }
 
     @GetMapping("/registerRoom")
@@ -82,6 +88,7 @@ public class StudentController {
         if(bindingResult.hasErrors()) {
             return "UpdateStudent";
         }
+        System.out.println("STU "+ student);
         studentService.saveStudent(student);
         return "redirect:/showStudentList";
     }

@@ -54,17 +54,38 @@
     <div class="w-100 h-30 p-2 d-flex align-items-center">
         <img src="/img/Logo.png" width="125px">
         <nav class="navbar  ms-auto flex-row">
-            <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="/showAccountList">TÀI KHOẢN</a>
+            <div class="navbar-element dropdown me-3">
+                <a class="nav-link dropdown-toggle" href="#" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    TÀI KHOẢN
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="navbar-element" href="/showAccountAddForm">Thêm mới</a></li>
+                    <li><a class="navbar-element" href="/showAccountList">Danh sách</a></li>
+                </ul>
             </div>
-            <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="/employee/showEmployeeList">NHÂN VIÊN</a>
+            <div class="navbar-element dropdown me-3">
+                <a class="nav-link dropdown-toggle" href="#" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    NHÂN VIÊN
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="navbar-element" href="/employee/showEmployeeAddForm">Thêm mới</a></li>
+                    <li><a class="navbar-element" href="/employee/showEmployeeList">Danh sách</a></li>
+                </ul>
             </div>
             <div class="flex-grow-1">
                 <a class="navbar-brand navbar-element" href="/showStudentList">SINH VIÊN</a>
             </div>
-            <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="/listRoomType">PHÒNG</a>
+            <div class="navbar-element dropdown me-3">
+                <a class="nav-link dropdown-toggle" href="#" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    LOẠI PHÒNG
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="navbar-element" href="/addRoomType">Thêm mới</a></li>
+                    <li><a class="navbar-element" href="/listRoomType">Danh sách</a></li>
+                </ul>
             </div>
             <div class="flex-grow-1">
                 <a class="navbar-brand navbar-element" href="#">HÓA ĐƠN</a>
