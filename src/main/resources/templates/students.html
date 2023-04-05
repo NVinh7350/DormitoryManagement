@@ -66,9 +66,7 @@
     </thead>
     <tbody>
     <tr class="tr" th:each="student : ${students}">
-      <td>
-        <input type="checkbox">
-      </td>
+
       <td th:text="${student.studentId}"></td>
       <td class="fw-bold" th:text="${student.studentName}"></td>
       <td th:text="${student.gender}"></td>
