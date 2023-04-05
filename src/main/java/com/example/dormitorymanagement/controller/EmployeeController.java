@@ -4,9 +4,11 @@ import com.example.dormitorymanagement.entity.Account;
 import com.example.dormitorymanagement.entity.Employee;
 import com.example.dormitorymanagement.repository.AccountRepository;
 import com.example.dormitorymanagement.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +29,11 @@ public class EmployeeController {
     }
 
     @PostMapping("/saveEmployee")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
-        Account account = new Account(employee.getEmployeeId(), employee.getEmployeeId(), employee.getAccountType());;
+    public String saveEmployee(@RequestBody @Valid @ModelAttribute("employee") Employee employee, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "EmployeeForm";
+        }
+        Account account = new Account(employee.getEmployeeId(), employee.getEmployeeId(), employee.getAccountType());
         accountRepository.save(account);
         employee.setAccount(account);
         employeeService.saveEmployee(employee);
@@ -44,7 +49,10 @@ public class EmployeeController {
 
 
     @PutMapping("/saveEmployee")
-    public String updateEmployee(@ModelAttribute("employee") Employee employee){
+    public String updateEmployee(@RequestBody @Valid @ModelAttribute("employee") Employee employee, BindingResult bindingResult){
+        if(bindingResult.hasErrors()) {
+            return "EmployeeForm";
+        }
         employeeService.saveEmployee(employee);
         return "redirect:/employee/showEmployeeList";
     }

@@ -38,8 +38,7 @@
                     <div class="col-md-12">
                       <label  class="form-label">Phòng</label>
                       <input type="text" class="form-control"
-                             th:field="*{room.roomName}"
-                             readonly="true"
+                             th:field="*{room}"
                              placeholder="" >
 
                     </div>
@@ -54,43 +53,56 @@
                 <div class="col-md-12">
                   <label  class="form-label">Email</label>
                   <input type="text" class="form-control"
-                         th:field="*{email}"
-
-                  >
+                         th:field="*{email}">
+                  <span class="error-span" th:if="${#fields.hasErrors('email')}"
+                        th:errors="*{email}"></span>
                 </div>
                 <div class="col-md-12">
                   <label  class="form-label">Địa chỉ</label>
                   <input type="text" class="form-control"
                          th:field="*{address}"
+
                          placeholder="" >
+                  <span class="error-span" th:if="${#fields.hasErrors('address')}"
+                        th:errors="*{address}"></span>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="col-md-12">
-                  <label class="form-label">CCCD/CMND</label>
+                  <label class="form-label">CCCD</label>
                   <input type="text" class="form-control"
                          th:field="*{studentId}"
-                         readonly="true"
+
                          placeholder="" >
+                  <span class="error-span" th:if="${#fields.hasErrors('studentId')}"
+                        th:errors="*{studentId}"></span>
                 </div>
                 <div class="col-md-12">
                   <label  class="form-label">Họ và tên</label>
                   <input type="text" class="form-control"
                          th:field="*{studentName}"
+
                          placeholder="Nhập họ và tên" >
+                  <span class="error-span" th:if="${#fields.hasErrors('studentName')}"
+                        th:errors="*{studentName}"></span>
                 </div>
                 <div class="col-md-12">
                   <label  class="form-label">Số điện thoại</label>
                   <input type="text" class="form-control"
                          th:field="*{phone}"
-                         placeholder="Nhập họ và tên" >
+                         placeholder="Nhập số điện thoại" >
+                  <span class="error-span" th:if="${#fields.hasErrors('phone')}"
+                        th:errors="*{phone}"></span>
                 </div>
                 <div class="row g-4">
                   <div class="col-md-6">
                     <label class="form-label">Ngày sinh</label>
                     <input type="date" class="form-control"
                            th:field="*{birthDay}"
+
                            placeholder="" required>
+                    <span class="error-span" th:if="${#fields.hasErrors('birthDay')}"
+                          th:errors="*{birthDay}"></span>
                   </div>
                   <div class="col-md-6">
                     <label class="form-label">Giới tính</label>
@@ -116,6 +128,8 @@
                 <input type="text" class="form-control"
                        th:field="*{relativeName}"
                        placeholder="Nhập họ và tên" >
+                <span class="error-span" th:if="${#fields.hasErrors('relativeName')}"
+                      th:errors="*{relativeName}"></span>
               </div>
 
               <div class="col-md-6">
@@ -124,8 +138,9 @@
                     <label  class="form-label">Số điện thoại</label>
                     <input type="text" class="form-control"
                            th:field="*{relativePhone}"
-
                            placeholder="Nhập số điện thoại" required>
+                    <span class="error-span" th:if="${#fields.hasErrors('relativePhone')}"
+                          th:errors="*{relativePhone}"></span>
                   </div>
                 </div>
               </div>
@@ -136,6 +151,8 @@
                        placeholder="Nhập địa chỉ thường trú"
                        required>
               </div>
+              <span class="error-span" th:if="${#fields.hasErrors('relativeAddress')}"
+                    th:errors="*{relativeAddress}"></span>
             </div>
           </div>
         </div>

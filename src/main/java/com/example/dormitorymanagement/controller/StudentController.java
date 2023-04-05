@@ -6,10 +6,12 @@ import com.example.dormitorymanagement.entity.Room;
 import com.example.dormitorymanagement.entity.Student;
 import com.example.dormitorymanagement.service.AccountService;
 import com.example.dormitorymanagement.service.StudentService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +35,11 @@ public class StudentController {
     }
 
     @PostMapping("/saveStudent")
-    public String saveStudent(@ModelAttribute("student") Student student) {
+    public String saveStudent(@RequestBody @Valid @ModelAttribute("student") Student student, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            System.err.println(student);
+            return "RegisterRoom";
+        }
         studentService.saveStudent(student);
         return "redirect:/showStudentList";
     }
@@ -66,7 +72,10 @@ public class StudentController {
 
 
     @PutMapping("/updateStudent")
-    public String updateStudent(@ModelAttribute("student") Student student) {
+    public String updateStudent(@RequestBody @Valid @ModelAttribute("student") Student student, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "UpdateStudent";
+        }
         studentService.saveStudent(student);
         return "redirect:/showStudentList";
     }
