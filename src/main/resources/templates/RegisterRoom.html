@@ -33,32 +33,44 @@
                         <div class="col-md-4">
                             <label class="form-label">Họ và tên</label>
                             <input type="text" class="form-control"  th:field="*{studentName}"
-                                   placeholder="Nhập họ và tên" >
+                                   placeholder="Nhập họ và tên" required>
+                            <span class="error-span" th:if="${#fields.hasErrors('studentName')}"
+                                  th:errors="*{studentName}"></span>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">CMND</label>
                             <input type="text" class="form-control"  th:field="*{studentId}"
-                                   placeholder="Nhập số CCCD/ CMND" >
+                                   placeholder="Nhập số CCCD/ CMND" required>
+                            <span class="error-span" th:if="${#fields.hasErrors('studentId')}"
+                                  th:errors="*{studentId}"></span>
                         </div>
                         <div class="col-md-4">
                             <label  class="form-label">Địa chỉ</label>
                             <input type="text" class="form-control"  th:field="*{address}"
-                                   placeholder="Nhập địa chỉ thường trú" >
+                                   placeholder="Nhập địa chỉ thường trú" required>
+                            <span class="error-span" th:if="${#fields.hasErrors('address')}"
+                                  th:errors="*{address}"></span>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Email</label>
                             <input type="text" class="form-control"  th:field="*{email}"
-                            >
+                                   placeholder="Nhập địa chỉ email" required>
+                            <span class="error-span" th:if="${#fields.hasErrors('email')}"
+                                  th:errors="*{email}"></span>
                         </div>
                         <div class="col-md-4">
                             <label  class="form-label">Số điện thoại</label>
                             <input type="text" class="form-control"  th:field="*{phone}"
-                                   placeholder="Nhập số điện thoại" >
+                                   placeholder="Nhập số điện thoại" required>
+                            <span class="error-span" th:if="${#fields.hasErrors('phone')}"
+                                  th:errors="*{phone}"></span>
                         </div>
 
                         <div class="col-md-2">
                             <label  class="form-label">Ngày sinh</label>
-                            <input type="date" class="form-control"  th:field="*{birthDay}" >
+                            <input type="date" class="form-control"  th:field="*{birthDay}" required>
+                            <span class="error-span" th:if="${#fields.hasErrors('birthDay')}"
+                                  th:errors="*{birthDay}"></span>
                         </div>
 
                         <div class="col-md-2">
@@ -66,7 +78,7 @@
                             <div class="d-flex ">
                                 <div class="form-check w-35">
                                     <input class="form-check-input" type="radio" name="gender"
-                                           id="flexRadioDefault1" value="male">
+                                           id="flexRadioDefault1" value="male" checked>
                                     <label class="form-check-label" for="flexRadioDefault1">
                                         Nam
                                     </label>
@@ -79,6 +91,8 @@
                                     </label>
                                 </div>
                             </div>
+                            <span class="error-span" th:if="${#fields.hasErrors('gender')}"
+                                  th:errors="*{gender}"></span>
                         </div>
 
                     </div>
@@ -94,18 +108,24 @@
                         <div class="col-md-4">
                             <label class="form-label">Họ và tên</label>
                             <input type="text" class="form-control" th:field="*{relativeName}"
-                                   placeholder="Nhập họ và tên" >
+                                   placeholder="Nhập họ và tên" required>
+                            <span class="error-span" th:if="${#fields.hasErrors('relativeName')}"
+                                  th:errors="*{relativeName}"></span>
                         </div>
                         <div class="col-md-4">
                             <label  class="form-label">Số điện thoại</label>
                             <input type="text" class="form-control"  th:field="*{relativePhone}"
-                                   placeholder="Nhập số điện thoại" >
+                                   placeholder="Nhập số điện thoại" required>
+                            <span class="error-span" th:if="${#fields.hasErrors('relativePhone')}"
+                                  th:errors="*{relativePhone}"></span>
                         </div>
 
                         <div class="col-md-4">
                             <label class="form-label">Địa chỉ</label>
                             <input type="text" class="form-control h-78"  th:field="*{relativeAddress}"  placeholder="Nhập địa chỉ thường trú"
-                                   >
+                                   required>
+                            <span class="error-span" th:if="${#fields.hasErrors('relativeAddress')}"
+                                  th:errors="*{relativeAddress}"></span>
                         </div>
                     </div>
                 </div>
@@ -113,7 +133,7 @@
         </div>
         <div class="col-xl-6 col-lg-12">
             <button class="btn input-group m-5 btn-orange" style="margin-left: 10%; width: 250px;">
-                Đăng Ky
+                Đăng Ký
             </button>
         </div>
     </form>
