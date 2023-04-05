@@ -21,6 +21,7 @@ public class SurchargeController {
     public String showSurchargeAddForm(Model model){
         Surcharge surcharge = new Surcharge();
         model.addAttribute("surcharge", surcharge);
+        model.addAttribute("title", "THÊM MỚI PHỤ PHÍ");
         return "SurchargeForm";
     }
 
@@ -34,12 +35,14 @@ public class SurchargeController {
     public String showSurchargeList(Model model){
         List<Surcharge> surchargeList = surchargeService.getAllSurcharge();
         model.addAttribute("surchargeList", surchargeList);
+        model.addAttribute("title", "QUẢN LÝ PHỤ PHÍ");
         return "Surcharges";
     }
     @GetMapping("/showSurchargeUpdateForm/{id}")
     public String showSurchargeUpdateForm(@PathVariable(value="id") String id, Model model){
         Surcharge surcharge = surchargeService.getSurchargeById(Integer.valueOf(id));
         model.addAttribute("surcharge", surcharge);
+        model.addAttribute("title", "CẬP NHẬT PHỤ PHÍ");
         return "SurchargeForm";
     }
 
@@ -59,6 +62,7 @@ public class SurchargeController {
             surchargeList = surchargeService.getAllSurcharge();
         }
         model.addAttribute("surchargeList", surchargeList);
+        model.addAttribute("title", "QUẢN LÝ PHỤ PHÍ");
         return surchargeList;
     }
 

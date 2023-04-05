@@ -27,6 +27,7 @@ public class AccountController {
     public String showEmployeeAddForm(Model model){
         Account account = new Account();
         model.addAttribute("account", account);
+        model.addAttribute("title", "THÊM TÀI KHOẢN");
         return "AddAccount";
     }
 
@@ -40,6 +41,7 @@ public class AccountController {
     public String showAccountList(Model model){
         List<Account> accounts = accountService.getAllAccount();
         model.addAttribute("accounts", accounts);
+        model.addAttribute("title", "QUẢN LÝ TÀI KHOẢN");
         return "Accounts";
     }
 
@@ -48,6 +50,7 @@ public class AccountController {
     public String showEmployeeUpdateForm(@PathVariable(value="username") String username, Model model){
         Account account = accountService.getAccountByUsername(username);
         model.addAttribute("account", account);
+        model.addAttribute("title", "CẬP NHẬT TÀI KHOẢN");
         return "UpdateAccount";
     }
 
