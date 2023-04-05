@@ -39,12 +39,12 @@
                 <a class="navbar-brand navbar-element" href="/guest/contact">LIÊN LẠC</a>
             </div>
             <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">ĐĂNG NHẬP</a>
+                <a class="navbar-brand navbar-element" href="/guest/login">ĐĂNG NHẬP</a>
             </div>
         </nav>
     </div>
     <div class="w-100 h-75 d-flex flex-column justify-content-center align-items-center text-white">
-        <h1 th:text="${tieude}"></h1>
+        <h1 th:text="${title}"></h1>
         <p>Được thiết kế và xây dựng bới nhóm 1- Đô một thùng</p>
     </div>
 </div>
@@ -55,19 +55,16 @@
         <img src="/img/Logo.png" width="125px">
         <nav class="navbar  ms-auto flex-row">
             <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">TRANG CHỦ</a>
+                <a class="navbar-brand navbar-element" href="/showAccountList">TÀI KHOẢN</a>
             </div>
             <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">TÀI KHOẢN</a>
+                <a class="navbar-brand navbar-element" href="/employee/showEmployeeList">NHÂN VIÊN</a>
             </div>
             <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">NHÂN VIÊN</a>
+                <a class="navbar-brand navbar-element" href="/showStudentList">SINH VIÊN</a>
             </div>
             <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">SINH VIÊN</a>
-            </div>
-            <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">PHÒNG</a>
+                <a class="navbar-brand navbar-element" href="/listRoomType">PHÒNG</a>
             </div>
             <div class="flex-grow-1">
                 <a class="navbar-brand navbar-element" href="#">HÓA ĐƠN</a>
@@ -78,7 +75,7 @@
         </nav>
     </div>
     <div class="w-100 h-75 d-flex flex-column justify-content-center align-items-center text-white">
-        <h1 th:text="${tieude}"></h1>
+        <h1 th:text="${title}"></h1>
         <p>Được thiết kế và xây dựng bới nhóm 1- Đô một thùng</p>
     </div>
 </div>

@@ -22,7 +22,11 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping(path = "/saveStudentAJAX", consumes = "application/json")
-    public String saveStudentAJAX(@RequestBody Student student) {
+    public String saveStudentAJAX(@RequestBody @Valid Student student , BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            System.err.println(student);
+            return "RegisterRoom";
+        }
         studentService.saveStudent(student);
         return "redirect:/guest/rooms";
     }
@@ -34,20 +38,21 @@ public class StudentController {
         return "RegisterRoom";
     }
 
-    @PostMapping("/saveStudent")
-    public String saveStudent(@RequestBody @Valid @ModelAttribute("student") Student student, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()) {
-            System.err.println(student);
-            return "RegisterRoom";
-        }
-        studentService.saveStudent(student);
-        return "redirect:/showStudentList";
-    }
+//    @PostMapping("/saveStudent")
+//    public String saveStudent(@RequestBody @Valid @ModelAttribute("student") Student student, BindingResult bindingResult) {
+//        if(bindingResult.hasErrors()) {
+//            System.err.println(student);
+//            return "RegisterRoom";
+//        }
+//        studentService.saveStudent(student);
+//        return "redirect:/showStudentList";
+//    }
 
     @GetMapping("/showStudentList")
     public String showStudentList(Model model){
         List<Student> students = studentService.getAllStudents();
         model.addAttribute("students", students);
+        model.addAttribute("title", "QUẢN LÝ SINH VIÊN");
         return "students";
     }
 
@@ -65,6 +70,7 @@ public class StudentController {
     public String showEmployeeUpdateForm(@PathVariable(value="id") String id, Model model){
         Student student = studentService.getElementById(id);
         model.addAttribute("student", student);
+        model.addAttribute("title", "CẬP NHẬT SINH VIÊN");
         return "UpdateStudent";
     }
 
@@ -82,7 +88,7 @@ public class StudentController {
 
     @GetMapping("/findStudentsName")
     public String showStudentList(Model model, @Param("keyword") String keyword){
-        List<Student> students = studentService.findStudentByName(keyword);
+        List<Student> students = studentService.getAllStudents();
         model.addAttribute("students", students);
         return "students";
     }
@@ -98,6 +104,7 @@ public class StudentController {
             lst_Students = studentService.findStudentsFilter(studentState, keyword);
         }
         model.addAttribute("lst_Student", lst_Students);
+        model.addAttribute("title", "QUẢN LÝ SINH VIÊN");
         return lst_Students;
     }
 }

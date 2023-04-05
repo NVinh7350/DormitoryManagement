@@ -23,11 +23,7 @@
 
 <h5 class="text-center m-4 fw-bold" th:text="'Đặt phòng '+${room.roomName}"></h5>
 <div class="d-flex justify-content-center">
-    <form id="registerForm"
-          class="row w-80"
-          action="#" th:action="@{/saveStudent}" th:object="${student}"
-          method="post"
-    >
+    <div class="row w-80"  th:object="${student}">
         <div class="col-md-12">
             <div class="card m-5 mt-3">
                 <div class="card-body p-4" style="font-size: 14px;">
@@ -76,6 +72,7 @@
                             <input id="birthDay" type="date" class="form-control"  th:field="*{birthDay}" required>
                             <span class="error-span" th:if="${#fields.hasErrors('birthDay')}"
                                   th:errors="*{birthDay}"></span>
+
                         </div>
 
                         <div class="col-md-2">
@@ -123,26 +120,27 @@
                                    placeholder="Nhập số điện thoại" required>
                             <span class="error-span" th:if="${#fields.hasErrors('relativePhone')}"
                                   th:errors="*{relativePhone}"></span>
+
                         </div>
 
                         <div class="col-md-4">
                             <label class="form-label">Địa chỉ</label>
-
                             <input id="relativeAddress" type="text" class="form-control h-78"  th:field="*{relativeAddress}"  placeholder="Nhập địa chỉ thường trú"
                                    required>
                             <span class="error-span" th:if="${#fields.hasErrors('relativeAddress')}"
                                   th:errors="*{relativeAddress}"></span>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-xl-6 col-lg-12">
-            <button class="btn input-group m-5 btn-orange" style="margin-left: 10%; width: 250px;">
+            <button id="btn-submit" onclick="registerRoom()" class="btn input-group m-5 btn-orange" style="margin-left: 10%; width: 250px;">
                 Đăng Ký
             </button>
         </div>
-    </form>
+    </div>
 
 </div>
 
@@ -155,7 +153,7 @@
     /*<![CDATA[*/
     var room = [[${room}]];
     /*]]>*/
-    $('#registerForm').submit(function (){
+   const registerRoom = function (){
         student = {
             ...student,
             studentId : $('#studentId').val(),
@@ -174,14 +172,14 @@
             alert("Phòng này không dành cho bạn");
         } else {
             $.ajax({
-                method:"POST",
+                method:"post",
                 url:`/saveStudentAJAX`,
                 data:JSON.stringify(student),
                 dataType: 'json',
                 contentType: "application/json; charset=utf-8"
             })
         }
-    })
+    }
 </script>
 </body>
 </html>

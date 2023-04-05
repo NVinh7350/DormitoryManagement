@@ -37,6 +37,7 @@ public class GuestController {
         List<Room> roomList = roomService.getAllRoom();
         model.addAttribute("roomTypeList", roomTypeList);
         model.addAttribute("roomList", roomList);
+        model.addAttribute("title", "THÔNG TIN PHÒNG");
         return "GuestRooms";
     }
 
@@ -47,11 +48,13 @@ public class GuestController {
         List<RoomType> roomTypeList = roomTypeService.getAllRoomType();
         roomTypeList.remove(roomTypeCurrent);
         model.addAttribute("roomTypeList", roomTypeList);
+        model.addAttribute("title", "THÔNG TIN CHI TIẾT LOẠI PHÒNG");
         return "GuestDetailRoom";
     }
 
     @GetMapping("/procedure")
     public String showProcedure(Model model) {
+        model.addAttribute("title", "THÔNG TIN THỦ TỤC");
         return "GuestProcedure";
     }
 
@@ -59,6 +62,7 @@ public class GuestController {
     public String showSurcharge(Model model) {
         List<Surcharge> surchargeList = surchargeService.getAllSurcharge();
         model.addAttribute("surchargeList", surchargeList);
+        model.addAttribute("title", "THÔNG TIN BẢNG GIÁ");
         return "GuestSurcharge";
     }
 
@@ -66,6 +70,7 @@ public class GuestController {
     public String showContact(Model model) {
         List<Employee> employeeList = employeeService.getAllEmployee();
         model.addAttribute("employeeList", employeeList);
+        model.addAttribute("title", "THÔNG TIN LIÊN LẠC");
         return "GuestContact";
     }
 
@@ -76,6 +81,7 @@ public class GuestController {
         Student student=new Student();
         student.setRoom(room);
         model.addAttribute("student", student);
+        model.addAttribute("title", "ĐẶT PHÒNG");
         return "RegisterRoom";
     }
 

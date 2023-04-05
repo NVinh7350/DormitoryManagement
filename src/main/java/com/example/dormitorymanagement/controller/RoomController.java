@@ -23,7 +23,7 @@ public class RoomController {
         Room room = new Room();
         List<RoomType> lstRoomType = roomTypeService.getAllRoomType();
         model.addAttribute("typeRoomList", lstRoomType);
-        model.addAttribute("tieude", "Quản lí phòng");
+        model.addAttribute("title", "THÊM PHÒNG MỚI");
         model.addAttribute("room" , room);
         return "AddRoom";
     }
@@ -39,7 +39,7 @@ public class RoomController {
     public String listAllRoom(Model model) {
         List<Room> lstroom = roomService.getAllRoom();
         model.addAttribute("listRoom", lstroom);
-        model.addAttribute("tieude", "Quản lí phòng");
+        model.addAttribute("title", "QUẢN LÝ PHÒNG");
         return "RoomList";
     }
     @GetMapping("/deleteRoom/{id}")
@@ -55,7 +55,7 @@ public class RoomController {
         model.addAttribute("room", room);
         List<RoomType> lstRoomType = roomTypeService.getAllRoomType();
         model.addAttribute("typeRoomList", lstRoomType);
-        model.addAttribute("tieude", "Quản lí phòng");
+        model.addAttribute("title", "CẬP NHẬT PHÒNG");
         return "UpdateRoom";
 
     }
@@ -77,6 +77,7 @@ public class RoomController {
             lstroom = roomService.getRoomListByName(keyword);
         }
         model.addAttribute("lst_room", lstroom);
+        model.addAttribute("title", "QUẢN LÝ PHÒNG");
         return lstroom;
     }
 

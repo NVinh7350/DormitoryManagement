@@ -45,7 +45,7 @@
                     <div class="col-md-12">
                       <label  class="form-label">Tình trạng</label>
                       <input type="text" class="form-control" value="Đang ở"
-                             th:field="*{studentState}"
+                             th:value="${student.studentState == 'wait' ? 'Chờ duyệt' : 'Đã nhận phòng'}"
                              placeholder="" >
                     </div>
                   </div>
@@ -107,7 +107,8 @@
                   <div class="col-md-6">
                     <label class="form-label">Giới tính</label>
                     <input type="text" class="form-control"
-                           th:field="*{gender} == 'male'? 'Nam': 'Nữ'"
+                           th:value="${student.gender == 'male' ? 'Nam' : 'Nữ'}"
+                           readonly="true"
                            placeholder="Nhập họ và tên" required>
                   </div>
                 </div>

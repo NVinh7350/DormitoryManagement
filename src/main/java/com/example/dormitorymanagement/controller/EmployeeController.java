@@ -25,6 +25,7 @@ public class EmployeeController {
     public String showEmployeeAddForm(Model model){
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
+        model.addAttribute("title", "THÊM NHÂN VIÊN");
         return "EmployeeForm";
     }
 
@@ -44,6 +45,7 @@ public class EmployeeController {
     public String showEmployeeUpdateForm(@PathVariable(value="id") String id, Model model){
         Employee employee = employeeService.getElementById(id);
         model.addAttribute("employee", employee);
+        model.addAttribute("title", "CẬP NHẬT THÔNG TIN NHÂN VIÊN");
         return "EmployeeForm";
     }
 
@@ -61,6 +63,7 @@ public class EmployeeController {
     public String showEmployeeFilterList(Model model){
         List<Employee> employeeList = employeeService.getAllEmployee();
         model.addAttribute("employeeList", employeeList);
+        model.addAttribute("title", "DANH SÁCH NHÂN VIÊN");
         return "Employees";
     }
 
@@ -77,6 +80,7 @@ public class EmployeeController {
             employeeList = employeeService.filterAllEmployee(accountType);
         }
         model.addAttribute("employeeList", employeeList);
+        model.addAttribute("title", "DANH SÁCH NHÂN VIÊN");
         return employeeList;
     }
 
