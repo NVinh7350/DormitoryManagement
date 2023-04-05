@@ -227,8 +227,12 @@ body {
     overflow: auto;
 }
 
+.div-slide::-webkit-scrollbar{
+    display: none;
+}
+
 .div-slide img {
-    height: 285px;
+    /*height: 285px;*/
     min-width: 25%;
     margin: 0 0.5%;
 }
@@ -236,7 +240,7 @@ body {
 .div-slide .card{
     min-width: 30%;
     max-width: 35%;
-    margin: 0 0.5%;
+    margin: 0 2%;
 }
 
 .div-slide .contact-card {
@@ -262,7 +266,7 @@ body {
     position: absolute;
     width: 200px; 
     height: 285px; 
-    background-color: rgba(217, 217, 217, 0.4);
+    background-color: rgba(217, 217, 217, 0.6);
 }
 
 .contact-card-content {
@@ -365,4 +369,9 @@ body {
     color: red;
     font-size: 11px;
     font-style: italic;
+}
+
+.div-btn {
+    text-decoration: none;
+    color: #111111;
 }

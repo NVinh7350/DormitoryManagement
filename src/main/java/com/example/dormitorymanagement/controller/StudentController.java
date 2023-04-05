@@ -2,6 +2,7 @@ package com.example.dormitorymanagement.controller;
 
 import com.example.dormitorymanagement.entity.Account;
 import com.example.dormitorymanagement.entity.Employee;
+import com.example.dormitorymanagement.entity.Room;
 import com.example.dormitorymanagement.entity.Student;
 import com.example.dormitorymanagement.service.AccountService;
 import com.example.dormitorymanagement.service.StudentService;
@@ -18,6 +19,11 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @PostMapping(path = "/saveStudentAJAX", consumes = "application/json")
+    public String saveStudentAJAX(@RequestBody Student student) {
+        studentService.saveStudent(student);
+        return "redirect:/guest/rooms";
+    }
 
     @GetMapping("/registerRoom")
     public String showRegisterRoom(Model model){

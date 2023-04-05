@@ -1,0 +1,142 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <title>Danh sách phòng</title>
+    <link rel="stylesheet" th:href="@{/css/Layout.css}">
+    <link rel="stylesheet" th:href="@{/css/Table.css}">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+
+<body>
+<div class="w-100 h-100 flex-column full-background">
+    <div class="w-100 h-10 p-2 d-flex align-items-center">
+        <img src="../img/Logo.png" width="125px">
+        <nav class="navbar  ms-auto flex-row">
+            <div class="flex-grow-1">
+                <a class="navbar-brand navbar-element" href="/guest/home">TRANG CHỦ</a>
+            </div>
+            <div class="flex-grow-1">
+                <a class="navbar-brand navbar-element" href="/guest/rooms">PHÒNG</a>
+            </div>
+            <div class="navbar-element dropdown me-3">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    THÔNG TIN
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="navbar-element" href="/guest/surcharge">GIÁ CẢ</a></li>
+                    <li><a class="navbar-element" href="/guest/procedure">THỦ TỤC</a></li>
+                </ul>
+            </div>
+            <div class="flex-grow-1">
+                <a class="navbar-brand navbar-element" href="/guest/contact">LIÊN LẠC</a>
+            </div>
+            <div class="flex-grow-1">
+                <a class="navbar-brand navbar-element" href="#">ĐĂNG NHẬP</a>
+            </div>
+        </nav>
+    </div>
+    <div class="w-100 h-75 d-flex flex-column justify-content-center align-items-center text-white">
+        <h1>QUẢN LÝ KÝ TÚC XÁ SINH VIÊN</h1>
+        <p>Được thiết kế và xây dựng bới nhóm 1- Đô một thùng</p>
+        <button class="button-outline" type="button"> Giới thiệu </button>
+    </div>
+</div>
+<h3 class="mt-5 text-center">Đôi nét về Ký túc xá</h3>
+<div class="d-flex flex-wrap justify-content-evenly px-3 py-5" style="font-size: 13px;">
+    <div class="card w-45 mb-5">
+        <div class="card-body" style="background: #EEE1E1; color: rgb(90, 90, 90);">
+            <h5 class="card-title"> Quá trình hình thành</h5>
+            <p class="card-text"> Thực hiện Nghị quyết số 18/NQ-CP, Quyết định số 65/2009/QĐ-TTg của Chính phủ về
+                phát triển nhà ở cho học sinh sinh viên các trường đại học, cao đẳng, trung cấp chuyên nghiệp và dạy
+                nghề.</p>
+            <p class="card-text"> Quyết định số 4874/QĐ-UBND ngày 29/06/2009 của UBNDTP Đà Nẵng V/v phê duyệt dự án
+                đầu tư Ký túc xá tập trung phục vụ cho học sinh sinh viên các trường đại học, cao đẳng, trung cấp
+                chuyên nghiệp và dạy nghề trên địa bàn TP. Đà Nẵng.</p>
+            <p class="card-text"> Công trình Ký túc xá được UBND TP. Đà Nẵng làm chủ đầu tư, giao cho pên danh Công
+                ty cổ phần Đức Mạnh và Công ty cổ phần đầu tư & xây dựng 579 thi công xây dựng.</p>
+            <p class="card-text"> Đưa vào khai thác kể từ tháng 8 năm 2012 ở khu Ký túc xá phía Tây và tháng 8 năm
+                2013 ở khu Ký túc xá phía Đông. Ban đầu Ký túc xá được thành phố giao cho pên doanh DMC-579 quản lý
+                vận hành khai thác, đến 01/01/2017 Ký túc xá TP. Đà Nẵng chuyển giao cho “Công ty Quản lý nhà Đà
+                Nẵng” trực tiếp quản lý, vận hành và khai thác.</p>
+            <p class="card-text"> Đến ngày 7/9/2018 UBND thành phố Đà Nẵng ký Quyết định số 3918/QĐ-UBND về việc
+                thành lập Trung tâm Quản lý và Khai thác nhà Đà Nẵng trực thuộc Sở Xây dựng trên cơ sở hợp nhất Công
+                ty Quản lý nhà Đà Nẵng và Công ty Quản lý nhà chung cư thành phố Đà Nẵng trực thuộc Sở Xây dựng.</p>
+        </div>
+    </div>
+    <div class="card w-45 mb-5">
+        <div class="card-body" style="background: #EEE1E1; color: rgb(90, 90, 90);">
+            <h5 class="card-title"> Cơ sở vật chất</h5>
+            <p class="card-text"> Địa chỉ: 08 Hà Văn Tính, phường Hòa Khánh Nam, quận Liên Chiểu, TP. Đà Nẵng (cách
+                Đại học Sư phạm Đà Nẵng ~ 1.3Km, cách Đại học Bách Khoa Đà Nẵng ~ 1.5Km )</p>
+            <p class="card-text"> Diện tích: 25.358m2</p>
+            <p class="card-text"> Gồm 06 tòa nhà, có sức chứa gần 4.500 sinh viên.</p>
+            <p class="card-text"> 06 tòa nhà 5 tầng gồm các khu: A, B, C, D, E, F</p>
+            <p class="card-text"> Khu vực bố trí sinh viên nam: tầng 5 khu A, tầng 4, 5 khu B, C và khu D, E, F</p>
+            <p class="card-text"> Khu vực bố trí sinh viên nữ: tầng 1, 2, 3, 4 khu A, tầng 1, 2, 3 khu B, C</p>
+            <p class="card-text"> Khu vực dịch vụ & văn phòng Ký túc xá nằm tại khu điều hành Trung tâm</p>
+        </div>
+    </div>
+    <div class="card w-45 mb-5">
+        <div class="card-body" style="background: #EEE1E1; color: rgb(90, 90, 90);">
+            <h5 class="card-title">Dịch vụ tiện ích</h5>
+            <p class="card-text">Nhà ăn, điểm tâm</p>
+            <p class="card-text">Siêu thị mini tiện lợi</p>
+            <p class="card-text">Đào tạo lái xe ôtô, môtô</p>
+            <p class="card-text">Dạy tiếng anh</p>
+            <p class="card-text">Dịch vụ giặt ủi</p>
+            <p class="card-text">Dịch vụ cắt tóc</p>
+            <p class="card-text">Dịch vụ photocopy</p>
+            <p class="card-text">Câu lạc bộ thể hình</p>
+            <p class="card-text">Hệ thống wifi phủ sóng khắp Ký túc xá</p>
+            <p class="card-text">Và còn rất nhiều dịch vụ tiện ích khác đi kèm đáp ứng nhu cầu ăn, ở, học tập và
+                sinh hoạt của các bạn sinh viên…</p>
+            <p class="card-text">Ngoài ra chúng tôi luôn sẵn sàng hợp tác với các đối tác dịch vụ bên ngoài, nhằm đa
+                dạng hóa mô hình dịch vụ, phục vụ tốt nhất cho các bạn sinh viên. </p>
+        </div>
+    </div>
+    <div class="card w-45 mb-5">
+        <div class="card-body" style="background: #EEE1E1; color: rgb(90, 90, 90);">
+            <h5 class="card-title">Phong trào cộng đồng </h5>
+            <p class="card-text">Nồi cháo tình thương: Định kỳ hằng tháng Ký túc xá đều có 04 nồi cháo dành cho các
+                em nhỏ, những người có hoàn cảnh khó khăn ; Khu Tây: phát tại Trung tâm bảo trợ Đà Sơn ; Khu Đông:
+                Phát tại Bệnh viện Phụ sản Nhi</p>
+            <p class="card-text">Hiến máu nhân đạo: Hiện nay đã thành lập CLB ngân hàng máu nóng tại 02 khu Ký túc
+                xá, hằng năm Ký túc xá đóng góp hàng trăm đơn vị máu cho Hội Chữ thập đỏ…</p>
+            <p class="card-text">Phát sữa, quyên góp quần áo cũ cho các em tại Làng Hy Vọng, trẻ em bị chất độc màu
+                da cam</p>
+            <p class="card-text">Tặng xe đạp cho các em HSSV có hoàn cảnh khó khăn</p>
+            <p class="card-text">Chương trình “Tết sum vầy”: Hỗ trợ vé xe cho các em ở xa có hoàn cảnh khó khăn </p>
+        </div>
+    </div>
+</div>
+<h3 class="text-center">Một số hình ảnh</h3>
+<div class="div-slide">
+    <img alt="" src="../img/img1.png">
+    <img alt="" src="../img/img2.png">
+    <img alt="" src="../img/img4.png">
+    <img alt="" src="../img/img2.png">
+    <img alt="" src="../img/img1.png">
+    <img alt="" src="../img/img2.png">
+    <img alt="" src="../img/img4.png">
+    <img alt="" src="../img/img2.png">
+</div>
+
+<div th:replace="fragments :: footer"></div>
+
+<script th:inline="javascript">
+</script>
+</body>
+</html>
+

@@ -1,0 +1,114 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <title>index</title>
+    <link rel="stylesheet" th:href="@{/css/Layout.css}">
+    <link rel="stylesheet" th:href="@{/css/Table.css}">
+</head>
+<body>
+<div th:replace="fragments :: header"></div>
+<h3 class="mt-5 text-center">Các loại phòng hiện có</h3>
+<div class="div-slide">
+    <div class="card" th:each="roomType : ${roomTypeList}" >
+        <a class="div-btn" href="" th:href="@{/guest/rooms/{id}(id=${roomType.roomTypeId})}">
+            <div class="card-body p-4" style="font-size: 14px;">
+                <h6 class="card-title fw-bold mb-4" th:text="${roomType.roomTypeName} + ' ('+${roomType.genderUser == 'male'? 'Nam' : 'Nữ'}+')'"></h6>
+                <div style="display: flex;">
+                    <b style="min-width: 150px;">Số người tối đa:</b>
+                    <p style="flex:1" th:text="${roomType.roomCapacity}"></p>
+                </div>
+                <div style="display: flex;">
+                    <b style="min-width: 150px;">Giá phòng:</b>
+                    <p style="flex:1" th:text="${roomType.priceRoom}"></p>
+                </div>
+                <div style="display: flex;">
+                    <b style="min-width: 150px;">Mô tả:</b>
+                    <p style="flex:1" th:text="${roomType.typeRoomDescription}">
+                    </p>
+                </div>
+
+            </div>
+        </a>
+    </div>
+</div>
+<div class="card m-5">
+    <div class="card-body" style="width: 70%; font-size: 13px;">
+        <div class="d-flex container-fluid" style="flex: 3; ">
+            <form class="d-flex mb-3 me-3" >
+                <input class="form-control me-2" type="search" placeholder="Tìm kiếm theo tên" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <select class="form-select form-select-lg mb-3 mx-3" style="flex: 3; font-size: 13px;">
+                <option selected>Trạng thái</option>
+                <option value="1">Đã đầy</option>
+                <option value="2">Còn trống</option>
+            </select>
+        </div>
+    </div>
+    <table id="myTable">
+        <thead>
+        <tr>
+            <th>
+                Tên phòng
+            </th>
+            <th>
+                Loại phòng
+            </th>
+            <th>
+                <div class="d-flex align-items-center">
+                    <p>Giá thuê</p>
+                    <i href="#" class="bi bi-chevron-expand"></i>
+                </div>
+            </th>
+            <th>Dành cho</th>
+            <th>Số người</th>
+            <th style="text-align: center">Trạng thái</th>
+            <th style="text-align: center">Đăng ký</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="tr" th:each="room : ${roomList}">
+            <td class="fw-bold" th:text="${room.roomName}">A101</td>
+            <td th:text="${room.roomType.roomTypeName}"></td>
+            <td class="fw-bold" th:text="${room.roomType.priceRoom}"></td>
+            <td th:text="${room.roomType.genderUser} == 'male' ? 'Nam' : 'Nữ'"></td>
+            <td th:text="${room.studentNumberInRoom}+'/'+${room.roomType.getRoomCapacity()}"></td>
+            <td class="" th:if="!${room.studentNumberInRoom==room.roomType.getRoomCapacity()}">
+                <p class="status live">Còn trống</p>
+            </td>
+            <td class="" th:if="${room.studentNumberInRoom==room.roomType.getRoomCapacity()}">
+                <p class="status wait">Hết phòng</p>
+            </td>
+
+            <td class="view" th:if="${room.studentNumberInRoom==room.roomType.getRoomCapacity()}">
+                <div class="action-container">
+                    <i href="#" style="color:rgb(126, 123, 118)" class="bi bi-clipboard-plus-fill"></i>
+                </div>
+            </td>
+            <td class="view" th:if="${room.studentNumberInRoom!=room.roomType.getRoomCapacity()}">
+                <div class="action-container">
+                    <a href="#" th:href="@{/guest/registerRoom/{id}(id=${room.roomId})}">
+                        <i href="#" class="bi bi-clipboard-plus-fill"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div th:replace="fragments :: footer"></div>
+
+<script ></script>
+</body>
+</html>
+

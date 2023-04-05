@@ -54,7 +54,7 @@
         </td>
         <td th:text="${typeroom.roomTypeName}"></td>
         <td class="fw-bold" th:text="${typeroom.roomCapacity}"></td>
-        <td th:text="${typeroom.genderUser}"></td>
+        <td th:text="${typeroom.genderUser} == 'male' ? 'Nam': 'Nữ'"></td>
         <td th:text="${typeroom.priceRoom}"></td>
         <td class="view">
           <div class="action-container">
@@ -103,7 +103,7 @@
                       </td>
                       <td>${typeroom.roomTypeName}</td>
                       <td class="fw-bold">${typeroom.roomCapacity}</td>
-                      <td>${typeroom.genderUser}</td>
+                      <td>${typeroom.genderUser == 'male'? 'Nam': 'Nữ'}</td>
                       <td>${typeroom.priceRoom}</td>
                       <td class="view">
                         <div class="action-container">

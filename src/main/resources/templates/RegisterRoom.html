@@ -12,15 +12,19 @@
     <title>index</title>
     <link rel="stylesheet" th:href="@{/css/Layout.css}">
     <link rel="stylesheet" th:href="@{/css/Table.css}">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 <div th:replace="fragments :: header-admin"></div>
 
 
 
-<h4 class="text-center m-4 fw-bold">Đặt phòng A101</h4>
+<h5 class="text-center m-4 fw-bold" th:text="'Đặt phòng '+${room.roomName}"></h5>
 <div class="d-flex justify-content-center">
-    <form class="row w-80"
+    <form id="registerForm"
+          class="row w-80"
           action="#" th:action="@{/saveStudent}" th:object="${student}"
           method="post"
     >
@@ -32,33 +36,32 @@
                     <div class="row g-4">
                         <div class="col-md-4">
                             <label class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control"  th:field="*{studentName}"
-                                   placeholder="Nhập họ và tên" >
+                            <input id="studentName" type="text" class="form-control"  th:field="*{studentName}"
+                                   placeholder="Nhập họ và tên" required>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">CMND</label>
-                            <input type="text" class="form-control"  th:field="*{studentId}"
-                                   placeholder="Nhập số CCCD/ CMND" >
+                            <input id="studentId" type="text" class="form-control"  th:field="*{studentId}"
+                                   placeholder="Nhập số CCCD/ CMND" required>
                         </div>
                         <div class="col-md-4">
                             <label  class="form-label">Địa chỉ</label>
-                            <input type="text" class="form-control"  th:field="*{address}"
-                                   placeholder="Nhập địa chỉ thường trú" >
+                            <input id="studentAddress" type="text" class="form-control"  th:field="*{address}"
+                                   placeholder="Nhập địa chỉ thường trú" required>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Email</label>
-                            <input type="text" class="form-control"  th:field="*{email}"
-                            >
+                            <input id="email" type="text" class="form-control"  th:field="*{email}"
+                                   placeholder="Nhập địa chỉ email" required>
                         </div>
                         <div class="col-md-4">
                             <label  class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control"  th:field="*{phone}"
-                                   placeholder="Nhập số điện thoại" >
+                            <input id="phone" type="text" class="form-control"  th:field="*{phone}"
+                                   placeholder="Nhập số điện thoại" required>
                         </div>
-
                         <div class="col-md-2">
                             <label  class="form-label">Ngày sinh</label>
-                            <input type="date" class="form-control"  th:field="*{birthDay}" >
+                            <input id="birthDay" type="date" class="form-control"  th:field="*{birthDay}" required>
                         </div>
 
                         <div class="col-md-2">
@@ -93,19 +96,18 @@
                     <div class="row g-4">
                         <div class="col-md-4">
                             <label class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control" th:field="*{relativeName}"
-                                   placeholder="Nhập họ và tên" >
+                            <input id="relativeName" type="text" class="form-control" th:field="*{relativeName}"
+                                   placeholder="Nhập họ và tên" required>
                         </div>
                         <div class="col-md-4">
                             <label  class="form-label">Số điện thoại</label>
-                            <input type="text" class="form-control"  th:field="*{relativePhone}"
-                                   placeholder="Nhập số điện thoại" >
+                            <input id="relativePhone" type="text" class="form-control"  th:field="*{relativePhone}"
+                                   placeholder="Nhập số điện thoại" required>
                         </div>
 
                         <div class="col-md-4">
                             <label class="form-label">Địa chỉ</label>
-                            <input type="text" class="form-control h-78"  th:field="*{relativeAddress}"  placeholder="Nhập địa chỉ thường trú"
-                                   >
+                            <input id="relativeAddress" type="text" class="form-control"  th:field="*{relativeAddress}"  placeholder="Nhập địa chỉ thường trú" required>
                         </div>
                     </div>
                 </div>
@@ -113,7 +115,7 @@
         </div>
         <div class="col-xl-6 col-lg-12">
             <button class="btn input-group m-5 btn-orange" style="margin-left: 10%; width: 250px;">
-                Đăng Ky
+                Đăng Ký
             </button>
         </div>
     </form>
@@ -122,7 +124,41 @@
 
 <div th:replace="fragments :: footer"></div>
 
-<script ></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var student = [[${student}]];
+    /*]]>*/
+    /*<![CDATA[*/
+    var room = [[${room}]];
+    /*]]>*/
+    $('#registerForm').submit(function (){
+        student = {
+            ...student,
+            studentId : $('#studentId').val(),
+            studentName: $('#studentName').val(),
+            phone: $('#phone').val(),
+            email: $('#email').val(),
+            birthDay:$('#birthDay').val(),
+            gender:$("input[type='radio'][name='gender']:checked").val(),
+            address:$('#studentAddress').val(),
+            studentState: 'wait',
+            relativeName:$('#relativeName').val(),
+            relativePhone:$('#relativePhone').val(),
+            relativeAddress:$('#relativeAddress').val()
+        }
+        if(student.gender != room.roomType.genderUser){
+            alert("Phòng này không dành cho bạn");
+        } else {
+            $.ajax({
+                method:"POST",
+                url:`/saveStudentAJAX`,
+                data:JSON.stringify(student),
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8"
+            })
+        }
+    })
+</script>
 </body>
 </html>
 

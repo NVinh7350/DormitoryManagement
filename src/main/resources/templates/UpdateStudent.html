@@ -16,159 +16,140 @@
 <body>
 <div th:replace="fragments :: header"></div>
 
+<div class="d-flex justify-content-center">
+  <div class="w-85">
+    <form class="row g-4"
+          action="#" th:action="@{/updateStudent}" th:object="${student}"
+          th:method="put">
+      <div class="col-12">
+        <div class="card m-5 mt-3 mb-4">
+          <div class="card-body p-4" style="font-size: 14px;">
+            <h6 class="card-title fw-bold">Thông tin cá nhân</h6>
+            <div class="w-80 border-bottom m-3"></div>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="row g-4">
+                  <div class="col-md-3">
+                    <div class="d-flex p-1">
+                      <img src="../img/avatar.jpg" width="90%" style="aspect-ratio: 3/4; max-width: 134px;">
+                    </div>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="col-md-12">
+                      <label  class="form-label">Phòng</label>
+                      <input type="text" class="form-control"
+                             th:field="*{room.roomName}"
+                             readonly="true"
+                             placeholder="" >
 
-
-
-
-<div class="w-85">
-  <form class="row g-4"
-        action="#" th:action="@{/updateStudent}" th:object="${student}"
-        th:method="put">
-    <div class="col-12">
-      <div class="card m-5 mt-3 mb-4">
-        <div class="card-body p-4" style="font-size: 14px;">
-          <h6 class="card-title fw-bold">Thông tin cá nhân</h6>
-          <div class="w-80 border-bottom m-3"></div>
-          <div class="row g-4">
-            <div class="col-md-6">
-              <div class="row g-4">
-                <div class="col-md-3">
-                  <div class="d-flex p-1">
-                    <img src="../img/avatar.jpg" width="90%" style="aspect-ratio: 3/4; max-width: 134px;">
+                    </div>
+                    <div class="col-md-12">
+                      <label  class="form-label">Tình trạng</label>
+                      <input type="text" class="form-control" value="Đang ở"
+                             th:field="*{studentState}"
+                             placeholder="" >
+                    </div>
                   </div>
                 </div>
-                <div class="col-md-7">
-                  <div class="col-md-12">
-                    <label  class="form-label">Phòng</label>
-                    <input type="text" class="form-control"
-                           th:field="*{room}"
-                           placeholder="" >
-
-                  </div>
-                  <div class="col-md-12">
-                    <label  class="form-label">Tình trạng</label>
-                    <input type="text" class="form-control" value="Đang ở"
-                           th:field="*{studentState}"
-                           placeholder="" >
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <label  class="form-label">Email</label>
-                <input type="text" class="form-control"
-                       th:field="*{email}"
-
-                >
-              </div>
-              <div class="col-md-12">
-                <label  class="form-label">Địa chỉ</label>
-                <input type="text" class="form-control"
-                       th:field="*{address}"
-
-                       placeholder="" >
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="col-md-12">
-                <label class="form-label">CCCD/CMND</label>
-                <input type="text" class="form-control"
-                       th:field="*{studentId}"
-
-                       placeholder="" >
-              </div>
-              <div class="col-md-12">
-                <label  class="form-label">Họ và tên</label>
-                <input type="text" class="form-control"
-                       th:field="*{studentName}"
-
-                       placeholder="Nhập họ và tên" >
-              </div>
-              <div class="col-md-12">
-                <label  class="form-label">Số điện thoại</label>
-                <input type="text" class="form-control"
-                       th:field="*{phone}"
-                       placeholder="Nhập họ và tên" >
-              </div>
-              <div class="row g-4">
-                <div class="col-md-6">
-                  <label class="form-label">Ngày sinh</label>
-                  <input type="date" class="form-control"
-                         th:field="*{birthDay}"
-
-                         placeholder="" required>
-                </div>
-                <div class="col-md-6">
-                  <label class="form-label">Giới tính</label>
+                <div class="col-md-12">
+                  <label  class="form-label">Email</label>
                   <input type="text" class="form-control"
-                         th:field="*{gender}"
-                         placeholder="Nhập họ và tên" required>
+                         th:field="*{email}"
+
+                  >
+                </div>
+                <div class="col-md-12">
+                  <label  class="form-label">Địa chỉ</label>
+                  <input type="text" class="form-control"
+                         th:field="*{address}"
+                         placeholder="" >
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="col-12">
-      <div class="card m-5 mt-3 mb-4">
-        <div class="card-body p-4" style="font-size: 14px;">
-          <h6 class="card-title fw-bold">Thông tin nhân thân</h6>
-          <div class="w-80 border-bottom m-3"></div>
-          <div class="row g-4">
-            <div class="col-md-6">
-              <label  class="form-label">Họ và tên</label>
-              <input type="text" class="form-control"
-                     th:field="*{relativeName}"
-                     placeholder="Nhập họ và tên" >
-            </div>
-
-            <div class="col-md-6">
-              <div class="row">
+              <div class="col-md-6">
+                <div class="col-md-12">
+                  <label class="form-label">CCCD/CMND</label>
+                  <input type="text" class="form-control"
+                         th:field="*{studentId}"
+                         readonly="true"
+                         placeholder="" >
+                </div>
+                <div class="col-md-12">
+                  <label  class="form-label">Họ và tên</label>
+                  <input type="text" class="form-control"
+                         th:field="*{studentName}"
+                         placeholder="Nhập họ và tên" >
+                </div>
                 <div class="col-md-12">
                   <label  class="form-label">Số điện thoại</label>
                   <input type="text" class="form-control"
-                         th:field="*{relativePhone}"
-
-                         placeholder="Nhập số điện thoại" required>
+                         th:field="*{phone}"
+                         placeholder="Nhập họ và tên" >
+                </div>
+                <div class="row g-4">
+                  <div class="col-md-6">
+                    <label class="form-label">Ngày sinh</label>
+                    <input type="date" class="form-control"
+                           th:field="*{birthDay}"
+                           placeholder="" required>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Giới tính</label>
+                    <input type="text" class="form-control"
+                           th:field="*{gender} == 'male'? 'Nam': 'Nữ'"
+                           placeholder="Nhập họ và tên" required>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <label  class="form-label">Địa chỉ</label>
-              <input type="text" class="form-control h-78"
-                     th:field="*{relativeAddress}"
-                     placeholder="Nhập địa chỉ thường trú"
-                     required>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-12">
+        <div class="card m-5 mt-3 mb-4">
+          <div class="card-body p-4" style="font-size: 14px;">
+            <h6 class="card-title fw-bold">Thông tin nhân thân</h6>
+            <div class="w-80 border-bottom m-3"></div>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <label  class="form-label">Họ và tên</label>
+                <input type="text" class="form-control"
+                       th:field="*{relativeName}"
+                       placeholder="Nhập họ và tên" >
+              </div>
+
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-12">
+                    <label  class="form-label">Số điện thoại</label>
+                    <input type="text" class="form-control"
+                           th:field="*{relativePhone}"
+
+                           placeholder="Nhập số điện thoại" required>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label  class="form-label">Địa chỉ</label>
+                <input type="text" class="form-control h-78"
+                       th:field="*{relativeAddress}"
+                       placeholder="Nhập địa chỉ thường trú"
+                       required>
+              </div>
             </div>
           </div>
         </div>
+        <div class="col-xl-6 col-lg-12">
+          <button class="btn input-group ms-5 mb-3 btn-orange" style="margin-left: 10%; width: 250px;">
+            Cập nhật
+          </button>
+        </div>
       </div>
-      <div class="col-xl-6 col-lg-12">
-        <button class="btn input-group ms-5 mb-3 btn-orange" style="margin-left: 10%; width: 250px;">
-          Cập nhật
-        </button>
-      </div>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
 </div>
 
 
 <div th:replace="fragments :: footer"></div>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--=====================================================-->

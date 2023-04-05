@@ -22,7 +22,7 @@ public class RoomType {
     private int RoomCapacity;
     @Column(columnDefinition = "nvarchar(6)")
     private String GenderUser;
-    @Column(columnDefinition = "text")
+    @Column(columnDefinition = "ntext")
     private String TypeRoomDescription;
     @Column(columnDefinition = "money")
     private BigDecimal priceRoom;

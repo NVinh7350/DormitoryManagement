@@ -20,7 +20,7 @@ public class Student implements Serializable {
     private String studentId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "roomId", nullable = true, referencedColumnName = "roomId")
+    @JoinColumn(name = "roomId", nullable = false, referencedColumnName = "roomId")
 
     private Room room;
 

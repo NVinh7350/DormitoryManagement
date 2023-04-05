@@ -17,13 +17,13 @@
 
 <div th:fragment="header" class="w-100 h-30 flex-column header-background">
     <div class="w-100 h-30 p-2 d-flex align-items-center">
-        <img src="../img/Logo.png" width="125px">
+        <img src="/img/Logo.png" width="125px">
         <nav class="navbar  ms-auto flex-row">
             <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">TRANG CHỦ</a>
+                <a class="navbar-brand navbar-element" href="/guest/home">TRANG CHỦ</a>
             </div>
             <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">PHÒNG</a>
+                <a class="navbar-brand navbar-element" href="/guest/rooms">PHÒNG</a>
             </div>
             <div class="navbar-element dropdown me-3">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -31,12 +31,12 @@
                     THÔNG TIN
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="navbar-element" href="#">GIÁ CẢ</a></li>
-                    <li><a class="navbar-element" href="#">THỦ  </a></li>
+                    <li><a class="navbar-element" href="/guest/surcharge">GIÁ CẢ</a></li>
+                    <li><a class="navbar-element" href="/guest/procedure">THỦ TỤC </a></li>
                 </ul>
             </div>
             <div class="flex-grow-1">
-                <a class="navbar-brand navbar-element" href="#">LIÊN LẠC</a>
+                <a class="navbar-brand navbar-element" href="/guest/contact">LIÊN LẠC</a>
             </div>
             <div class="flex-grow-1">
                 <a class="navbar-brand navbar-element" href="#">ĐĂNG NHẬP</a>
@@ -52,7 +52,7 @@
 
 <div th:fragment="header-admin" class="w-100 h-30 flex-column header-background admin-background">
     <div class="w-100 h-30 p-2 d-flex align-items-center">
-        <img src="../img/Logo.png" width="125px">
+        <img src="/img/Logo.png" width="125px">
         <nav class="navbar  ms-auto flex-row">
             <div class="flex-grow-1">
                 <a class="navbar-brand navbar-element" href="#">TRANG CHỦ</a>
@@ -94,8 +94,5 @@
         <a href="#" class="bi bi-linkedin"></a>
     </div>
 </div>
-
-
-
 </body>
 </html>

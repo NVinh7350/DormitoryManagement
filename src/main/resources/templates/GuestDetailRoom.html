@@ -1,0 +1,100 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+  <title>index</title>
+  <link rel="stylesheet" th:href="@{/css/Layout.css}">
+  <link rel="stylesheet" th:href="@{/css/Table.css}">
+</head>
+<body>
+<div th:replace="fragments :: header"></div>
+
+<h4 class="text-start ms-5 mt-3 fw-bold">Loại phòng 6 sinh viên</h4>
+<div>
+  <div class="card m-5 mt-3" th:object="${roomTypeCurent}">
+    <div class="card-body p-4" style="font-size: 14px;">
+      <h6 class="card-title fw-bold mb-4" th:text="${roomTypeCurent.roomTypeName}"></h6>
+      <div class="d-flex justify-content-between">
+        <div class="d-flex flex-column w-45 ">
+          <div style="display: flex;">
+            <b style="min-width: 150px;">Số người tối đa:</b>
+            <p style="flex:1" th:text="${roomTypeCurent.roomCapacity} + ' Người'"></p>
+          </div>
+          <div style="display: flex;">
+            <b style="min-width: 150px;">Giá phòng:</b>
+            <p style="flex:1" th:text="${roomTypeCurent.priceRoom}+ ' vnđ'"></p>
+          </div>
+          <div style="display: flex;">
+            <b style="min-width: 150px;">Mô tả:</b>
+            <p style="flex:1" th:text="${roomTypeCurent.typeRoomDescription}">
+            </p>
+          </div>
+        </div>
+        <div style="width: 1px; height: 150px; background-color: gray;"></div>
+        <div class="d-flex flex-column w-45">
+          <div style="display: flex;">
+            <b style="min-width: 150px;">Trang thiết bị:</b>
+            <ul>
+              <li>Điều hòa Samsung ( 2 cái)</li>
+              <li>Giường 2 tầng 1,5 x 2m ( 2 cái)</li>
+              <li>Bàn ghế học (4 cái)</li>
+              <li>Tủ quần áo (2 cái)</li>
+              <li>Đèn học (4 cái)</li>
+              <li>Ấm siêu tốc (1 cái)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<h4 class="text-start ms-5 mt-3 fw-bold">Một số hình ảnh</h4>
+<div class="div-slide">
+  <img alt="" src="/img/img1.png">
+  <img alt="" src="/img/img2.png">
+  <img alt="" src="/img/img4.png">
+  <img alt="" src="/img/img2.png">
+  <img alt="" src="/img/img1.png">
+  <img alt="" src="/img/img2.png">
+  <img alt="" src="/img/img4.png">
+  <img alt="" src="/img/img2.png">
+</div>
+<h4 class="text-start ms-5 mt-3 fw-bold">Loại phòng khác</h4>
+<div class="div-slide">
+  <div class="card" th:each="roomType : ${roomTypeList}" >
+    <a class="div-btn" href="" th:href="@{/guest/rooms/{id}(id=${roomType.roomTypeId})}">
+      <div class="card-body p-4" style="font-size: 14px;">
+        <h6 class="card-title fw-bold mb-4" th:text="${roomType.roomTypeName} + ' ('+${roomType.genderUser == 'male'? 'Nam' : 'Nữ'}+')'"></h6>
+        <div style="display: flex;">
+          <b style="min-width: 150px;">Số người tối đa:</b>
+          <p style="flex:1" th:text="${roomType.roomCapacity}"></p>
+        </div>
+        <div style="display: flex;">
+          <b style="min-width: 150px;">Giá phòng:</b>
+          <p style="flex:1" th:text="${roomType.priceRoom}"></p>
+        </div>
+        <div style="display: flex;">
+          <b style="min-width: 150px;">Mô tả:</b>
+          <p style="flex:1" th:text="${roomType.typeRoomDescription}">
+          </p>
+        </div>
+
+      </div>
+    </a>
+  </div>
+</div>
+<div th:replace="fragments :: footer"></div>
+
+<script ></script>
+</body>
+</html>
+
