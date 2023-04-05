@@ -21,5 +21,4 @@ public class Account {
 
     @Column(columnDefinition = "nvarchar(8)")
     private String accountType;
-
 }

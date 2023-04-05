@@ -1,0 +1,193 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <title>index</title>
+    <link rel="stylesheet" th:href="@{/css/Layout.css}">
+    <link rel="stylesheet" th:href="@{/css/Table.css}">
+</head>
+<body>
+<div th:replace="fragments :: header-admin"></div>
+
+<form class="d-flex justify-content-center"
+      th:action="@{/createContract}"
+      method="post"
+>
+    <div class="row w-80">
+        <div class="col-md-12">
+            <div class="card m-3 mt-3 ">
+                <div class="card-body p-4" style="font-size: 14px;">
+                    <h6 class="card-title fw-bold">Thông tin cá nhân</h6>
+                    <div class="w-100 border-bottom m-3"></div>
+                    <div class="row g-4">
+                        <div class="col-md-10">
+                            <div class="row g-4">
+                                <div class="col-md-4">
+                                    <label  class="form-label">Họ và tên</label>
+                                    <input type="text" class="form-control"
+                                           th:field="${contractDTO.student.studentName}"
+                                    >
+                                    <input type="hidden" class="form-control"
+                                           name="id"
+                                           th:value="${contractDTO.student.studentId}"
+                                    >
+                                </div>
+                                <div class="col-md-4">
+                                    <label  class="form-label">CMND</label>
+                                    <input type="text" class="form-control"
+                                           placeholder="Nhập số CCCD/ CMND"
+                                           th:field="${contractDTO.student.studentId}"
+                                    >
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <label  class="form-label">Ngày sinh</label>
+                                            <input type="date" class="form-control"
+                                                   th:field="${contractDTO.student.birthDay}"
+                                            >
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label  class="form-label">Giới tính</label>
+                                            <input type="text" class="form-control"
+                                                   th:field="${contractDTO.student.gender}"
+
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label  class="form-label">Email</label>
+                                    <input type="text" class="form-control"
+                                           th:field="${contractDTO.student.email}"
+                                    >
+                                </div>
+                                <div class="col-md-4">
+                                    <label  class="form-label">Số điện thoại</label>
+                                    <input type="text" class="form-control"  value="09354175296"
+                                           th:field="${contractDTO.student.phone}"
+                                    >
+                                </div>
+                                <div class="col-md-4">
+                                    <label  class="form-label">Địa chỉ</label>
+                                    <input type="text" class="form-control" value="Duy Châu, Duy Xuyên, Quảng Nam"
+                                           th:field="${contractDTO.student.address}"
+                                    >
+                                </div>
+                                <a class="mt-4" href="#" >Thông tin chi tiết</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-5">
+            <div class="card m-3 ">
+                <div class="card-body p-4" style="font-size: 14px;">
+                    <h6 class="card-title fw-bold">Thông tin phòng</h6>
+                    <div class="w-100 border-bottom m-3"></div>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <label class="form-label">Phòng</label>
+                            <input type="text" class="form-control"
+                                   th:field="${contractDTO.room.roomName}"
+                            >
+
+                            <input type="hidden" class="form-control"
+                                   th:field="${contractDTO.room.roomId}"
+                            >
+                        </div>
+                        <div class="col-md-8">
+                            <label  class="form-label">Loại phòng</label>
+                            <input type="text" class="form-control"
+                                   th:field="${contractDTO.roomType.roomTypeName}"
+
+
+                            >
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Dành</label>
+                            <input type="text" class="form-control"
+                                   th:field="${contractDTO.roomType.genderUser}"
+
+
+                            >
+                        </div>
+                        <div class="col-md-8">
+                            <label  class="form-label">Giá thuê</label>
+                            <input type="text" class="form-control"
+                                   th:field="${contractDTO.roomType.priceRoom}"
+
+                                   >
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-7">
+            <div class="card m-3 ">
+                <div class="card-body p-4" style="font-size: 14px;">
+                    <h6 class="card-title fw-bold">Thông tin hợp đồng</h6>
+                    <div class="w-100 border-bottom m-3"></div>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label  class="form-label">Tên hợp đồng</label>
+                            <input type="text" class="form-control"   name="tenHopDong"  th:value="'Hợp đồng ' +${contractDTO.room.roomName}"
+                            >
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label">Ngày ký hợp đồng</label>
+                                    <input type="date" class="form-control"  name="SigningDate"  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                                           >
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Hạn hợp đồng</label>
+                                    <input type="date" class="form-control" name="ExpirationDate"  th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}"
+                                           >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label  class="form-label">File hợp đồng</label>
+                            <input type="file" class="form-control"  value=""
+                                   >
+                        </div>
+                        <div class="col-md-6">
+                            <label  class="form-label">Thông tin thêm</label>
+                            <input type="text" class="form-control" value=""
+                                   >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${contractDTO.student.studentState!='live'}">
+            <button class="btn btn- input-group m-4 btn-orange" style="width: 200px;" type="submit">
+                Tiếp theo
+            </button>
+            <button class="btn btn-secondary input-group m-4 " style="width: 200px;" type="reset">
+                Hủy
+            </button>
+        </div>
+    </div>
+</form>
+
+<div th:replace="fragments :: footer"></div>
+
+<script ></script>
+</body>
+</html>
+

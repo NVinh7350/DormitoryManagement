@@ -38,7 +38,6 @@
   <table id="myTable">
     <thead>
     <tr>
-      <th></th>
       <th>
         CMND/CCCD
       </th>
@@ -59,9 +58,6 @@
     </thead>
     <tbody id="tbody">
     <tr class="tr" th:each="employee : ${employeeList}">
-      <td>
-        <input type="checkbox">
-      </td>
       <td th:text="${employee.employeeId}" name="employeeId"></td>
       <td class="fw-bold" th:text="${employee.employeeName}"></td>
       <td th:text="${employee.gender}"></td>
@@ -112,9 +108,6 @@
             for (var element of data) {
               $("#myTable").append(
                  `<tr class="tr">
-                <td>
-                  <input type="checkbox">
-                </td>
                 <td name="employeeId">${element.employeeId}</td>
                 <td class="fw-bold">${element.employeeName}</td>
                 <td>${element.gender}</td>

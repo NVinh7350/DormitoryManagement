@@ -28,7 +28,4 @@ public class CheckInBill {
     @Column(columnDefinition = "ntext")
     private  String moreInformation;
 
-
-
-
 }

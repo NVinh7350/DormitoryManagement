@@ -30,20 +30,13 @@
         <div class="d-flex mb-3 me-3 w-35" >
           <input class="form-control me-2 mb-0" id="txtSearch" type="search" placeholder="Tìm kiếm" aria-label="Search" name="keyword">
           <button class="btn btn-outline-success" id="btnSearch" style="font-size: 13px;" type="button">Search</button>
-
         </div>
-        <div style="text-align: center">
-          <a class="btn btn-outline-primary" href="/addRoomType" style="font-size: 13px;" role="button">Thêm loại phòng</a>
-          <a class="btn btn-outline-primary" href="/listAllRoom" style="font-size: 13px;" role="button">Xem danh sách tất cả phòng</a>
-        </div>
-
 
       </div>
     </div>
     <table id="myTable">
       <thead>
       <tr>
-        <th></th>
         <th>
           Loại phòng
         </th>
@@ -57,9 +50,6 @@
       </thead>
       <tbody>
       <tr class="tr" th:each="typeroom : ${typeRoomList}">
-        <td>
-          <input type="checkbox">
-        </td>
         <td th:text="${typeroom.roomTypeName}"></td>
         <td class="fw-bold" th:text="${typeroom.roomCapacity}"></td>
         <td th:text="${typeroom.genderUser} == 'male' ? 'Nam': 'Nữ'"></td>
@@ -106,9 +96,6 @@
           for (var typeroom of data) {
             $("#myTable").append(
                     `<tr class="tr">
-                      <td>
-                        <input type="checkbox">
-                      </td>
                       <td>${typeroom.roomTypeName}</td>
                       <td class="fw-bold">${typeroom.roomCapacity}</td>
                       <td>${typeroom.genderUser == 'male'? 'Nam': 'Nữ'}</td>

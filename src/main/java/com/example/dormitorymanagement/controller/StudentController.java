@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @Controller
 public class StudentController {
     @Autowired
@@ -27,7 +28,6 @@ public class StudentController {
     public String saveStudentAJAX(@RequestBody Student student) {
         int studentNumberInRoom = student.getRoom().getStudentNumberInRoom();
         int roomCapacity = student.getRoom().getRoomType().getRoomCapacity();
-        System.out.println("STUDENT "+ student);
         if(roomCapacity > studentNumberInRoom){
             studentService.saveStudent(student);
             return "redirect:/guest/rooms";
@@ -43,16 +43,6 @@ public class StudentController {
         model.addAttribute("student", student);
         return "RegisterRoom";
     }
-
-//    @PostMapping("/saveStudent")
-//    public String saveStudent(@RequestBody @Valid @ModelAttribute("student") Student student, BindingResult bindingResult) {
-//        if(bindingResult.hasErrors()) {
-//            System.err.println(student);
-//            return "RegisterRoom";
-//        }
-//        studentService.saveStudent(student);
-//        return "redirect:/showStudentList";
-//    }
 
     @GetMapping("/showStudentList")
     public String showStudentList(Model model){
@@ -88,7 +78,6 @@ public class StudentController {
         if(bindingResult.hasErrors()) {
             return "UpdateStudent";
         }
-        System.out.println("STU "+ student);
         studentService.saveStudent(student);
         return "redirect:/showStudentList";
     }
