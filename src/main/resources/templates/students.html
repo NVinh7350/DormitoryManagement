@@ -75,16 +75,25 @@
       <td th:text="${student.gender}"></td>
       <td th:text="${student.phone}"></td>
       <td th:text="${student.birthDay}"></td>
-      <td th:text="${student.room.roomName}"></td>
+      <td th:text="${student.room.roomName}" th:value="student.room.roomId"></td>
       <td class="">
         <p class="status" th:classappend= "${student.studentState == 'wait'} ? 'wait' : (${student.studentState == 'live'} ? 'live' : 'extension')"
-           th:text="${student.studentState !='live'}?'Chờ xác nhận':'Đang ở'">
+           th:text="${student.studentState !='live'}?'Chờ xác nhận':'Đang ở'"
+           name="studentState"
+           th:value="${student.studentState}"
+        >
         </p>
       </td>
       <td class="view">
         <div class="action-container">
           <div class="view">
-            <i  class="bi bi-eye-fill"></i>
+<!--            <a href="#" th:href="@{/showStudentAprovalForm/{id}/{idRoom}(id=${student.studentId},idRoom=${student.room.roomId})} ">-->
+<!--              <i  class="bi bi-eye-fill"></i>-->
+<!--            </a>-->
+
+            <a href="#" th:href="@{/showStudentApprovalForm/{id}/{idRoom}(id=${student.studentId},idRoom=${student.room.roomId})} ">
+              <i  class="bi bi-eye-fill"></i>
+            </a>
           </div>
           <div class="add">
             <a href="#" th:href="@{/showStudentUpdateForm/{id}(id=${student.studentId})}">
@@ -104,6 +113,7 @@
 </div>
 
 <div th:replace="fragments :: footer"></div>
+
 <script th:inline="javascript">
   $('#btnSearch').on("click",function(){
     var value = $('#txtSearch').val();
@@ -114,7 +124,6 @@
       data: {
         keyword: value,
         studentState: select
-
       },
       success: function(data){
         if(data){
@@ -139,7 +148,9 @@
                 <td class="view">
                   <div class="action-container">
                     <div class="view">
-                      <i href="#" class="bi bi-eye-fill"></i>
+                     <a href="#" th:href="@{/showStudentAprovalForm} ">
+                         <i  class="bi bi-eye-fill"></i>
+                      </a>
                     </div>
                     <div class="add">
                       <a href="/showStudentUpdateForm/${student.studentId}">
@@ -150,7 +161,6 @@
                       <a href="/deleteStudent/${student.studentId}">
                         <i href="#" class="bi bi-trash-fill"></i>
                       </a>
-
                     </div>
                   </div>
                 </td>

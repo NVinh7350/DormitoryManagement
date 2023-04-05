@@ -3,17 +3,23 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Contract
+@ToString
+public class Contract implements Serializable
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int contractId;
+
     @ManyToOne
     @JoinColumn(name = "studentId", nullable = false, referencedColumnName = "studentId")
     private Student student;
@@ -29,4 +35,10 @@ public class Contract
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date ExpirationDate ;
 
+    public Contract(Student student, String tenHopDong, Date signingDate, Date expirationDate) {
+        this.student=student;
+        this.ContractName=tenHopDong;
+        this.SigningDate=signingDate;
+        this.ExpirationDate=expirationDate;
+    }
 }
